@@ -124,7 +124,7 @@ It appears that strings are the only variable length data sequence and the only 
 
 | Value      | Length   | Type                             |
 |------------|----------|----------------------------------|
-| 00         |        2 | Integer number, big endian       |
+| 00    ??   |        2 | Integer number, big endian       |
 | 20 - 3f    | variable | String of length argument - 0x20 |
 | 42         |        1 | Boolean "True"                   |
 | 43         |        1 | Boolean "False"                  |
@@ -138,8 +138,8 @@ It appears that strings are the only variable length data sequence and the only 
 |  00   | Info       |
 |  01   | Set        |
 |  02   | Get        |
-|  03   | Response(?)|
-|  f0   | Sequence(?)| 
+|  03   | Response ??|
+|  f0   | Sequence ??| 
 
 
 ## INFO Operation
@@ -156,7 +156,7 @@ Following SET operations are known:
 | Parameter | Description            | Arguments
 |-----------|------------------------|-----------------------------------------------------------
 | 01        | Send preset            | *UUID*, preset name, version, description, *float*, *byte*, noisegate name, boolean, ?,?, float, 
-| 02        | Change value           | 
+| 02        | Change value  ??       | ??
 | 04        | Change knob            | String: pedal name, Byte: knob reference, Float: new value
 | 06        | Change pedal           | String: old pedal name, String: new pedal name
 | 15        | Enable/disable a pedal | String: pedal name, Boolean: on/off
@@ -202,3 +202,25 @@ After a successful operation, amp sends back an "ack" packet with
 Command = 0x00 (info)
 Parameter = 0x04
 Value = 0x15
+
+
+## Pedal names
+
+#Compressors
+
+LA2AComp
+BlueComp
+Compressor
+BassComp
+BBEOpticalComp
+
+#Drive
+Booster
+DistortionTS9
+Overdrive
+Fuzz
+ProCoRat
+BassBigMuff
+GuitarMuff
+MaestroBassmaster
+SABdriver
