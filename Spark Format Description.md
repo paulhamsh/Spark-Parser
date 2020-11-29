@@ -80,32 +80,31 @@ Trailer
 
 ## Body structure
 
-The body of the message made of sequences of 8 bytes - 7 bytes of data and 'format' byte. 
+The body of the message made of sequences of 8 bytes - 1 format byte and then 7 bytes of data. 
 Arguments are sequential in the data sequence and the format byte shows where new a new argument starts.
 Each bit maps to a byte in the next sequence, and if the bit is set in the format byte then that byte in the sequence is the start of a new data element.
 Strings have their length as their first byte (stored as 0x20 + length).
 
-An example is shown below, with each new data sequence on a new line. The bit expansion is the 8th byte with the bits reversed, to show where the new sequence starts:
+An example is shown below, with each new data sequence on a new line. The bit expansion is the format byte with the bits reversed, to show where the new sequence starts:
 
-        D1 D2 D3 D4   D5 D6 D7         F1    Bit expansion of F1
-        xx xx xx xx   xx xx xx         02    0100 000x
-        xx 
-           2b 52 6f   79 61 62         40    0000 001x
-        20 43 72 6f   77 6e 
-                            23         08    0001 000x
-        30 2e 37 
-                 27   31 2d 43         10    0000 100x
-        6c 65 61 6e   
-                      28 69 63         40    0000 001x
-        6f 63 2e 70   6e 67 
-                            4a         32    0100 110x
-        42 
-           70 00 00   
-                      17 
-                         2e 62         00    0000 000x
-        69 61 73 2e   6e 6f 69         40    0000 001x
-        73 65 67 61   74 65 
-                            xx         xx    xxxx xxxx
+        F1   D1 D2 D3 D4   D5 D6 D7               Reversed bit expansion of F1
+        02   xx                                   0100 000x
+                2b 52 6f   79 61 62 x
+        40   20 43 72 6f   77 6e                  0000 001x
+                                 23 
+        08   30 2e 37                             0001 000x
+                      27   31 2d 43 
+        10   6c 65 61 6e                          0000 100x
+                           28 69 63
+        40   6f 63 2e 70   6e 67                  0000 001x
+                                 4a 
+        32   42                                   0100 110x 
+                70 00 00   
+                           17 
+                              2e 62        
+        00   69 61 73 2e   6e 6f 69               0000 000x
+        40   73 65 67 61   74 65                  0000 001x
+                                 xx
 
 Which translates to:
      String: Royal Crown
