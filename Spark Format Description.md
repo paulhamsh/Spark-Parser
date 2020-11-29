@@ -206,7 +206,7 @@ Value = 0x15
 
 ## Pedal names
 
-#Compressors
+##Compressors
 
 LA2AComp
 BlueComp
@@ -214,7 +214,7 @@ Compressor
 BassComp
 BBEOpticalComp
 
-#Drive
+##Drive
 Booster
 DistortionTS9
 Overdrive
