@@ -101,7 +101,11 @@ Arguments are sequential in the data sequence and the format byte shows where ne
 Each bit maps to a byte in the next sequence, and if the bit is set in the format byte then that byte in the sequence is the start of a new data element.
 Strings have their length as their first byte (stored as 0x20 + length).
 
-An example is shown below, with each new data sequence on a new line. The bit expansion is the format byte with the bits reversed, to show where the new sequence starts:
+An example is shown below, with each new data sequence on a new line. The bit expansion is the format byte with the bits reversed, to show where the new sequence starts.
+
+Exploring the data it doesn't look like the format bits are always correct.  
+It may be that each command / sub-command has a specific set of parameters and these bits are not required.  
+
 ```
      F1   D1 D2 D3 D4   D5 D6 D7               Reversed bit expansion of F1
      02   xx                                   0100 000x
