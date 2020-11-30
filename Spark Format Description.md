@@ -122,9 +122,8 @@ Which translates to:
      String: 0.7
      String: 1-Clean
      String: icon.png
-     ???: 4a 42
-     ???: 70 00 00
-     ???: 17
+     Float 42 70 00 00
+     Byte: 17
      String: .bias.noisegate
 
 It appears that strings are the only variable length data sequence and the only sequence that starts with a length
@@ -158,6 +157,7 @@ The only known operation is
 
 02 23  - Get hardware ID
 
+???
 
 ## SET operation
 
@@ -258,7 +258,7 @@ Following GET operations are known:
 | Parameter |                          |
 |-----------|--------------------------|
 |  01       | Get preset configuration |
-|  02       |                          |
+|  02       | ???                      |
 |  11       | Get device name          |
 
 ### 01 Get preset configuration
@@ -267,6 +267,7 @@ Multiple arguments, only first one is actually used
 
  - Integer number - Preset number starting 0, or 0x0100 for "current"
  - 34x "0x00" (that is 11x "Integer number, value 0" + 0x00)
+ ???
 
 ## ACK packets
 
