@@ -197,40 +197,59 @@ Followed by information for each pedal / amp:
 |----------|--------|-------------------------------------------------------|
 |  String  |      x | Pedal name                                            |
 |  Boolean |      1 | On/off                                                |
-|  Byte    |      1 | Number of values (+0x10)                              |
+|  Byte    |      1 | Number of knob values (+0x10)                         |
 
 Each pedal header is followed by data for each know / switch:
 
 | Type     | Length | Content                                               |
 |----------|--------|-------------------------------------------------------|
-|  Byte    |      1 | Value reference (starts at 0)                         |
+|  Byte    |      1 | Knob reference (starts at 0)                          |
 |  Byte    |      1 | 11???                                                 |
-|  Float   |      4 | Value to set                                          |
+|  Float   |      4 | Knob value                                            |
 |          |        |                                                       |
-|  Byte    |      1 | Value reference (starts at 0)                         |
+|  Byte    |      1 | Knob reference (starts at 0)                          |
 |  Byte    |      1 | 11???                                                 |
-|  Float   |      4 | Value to set                                          |
+|  Float   |      4 | Knob value                                            |
+|          |        |                                                       |
+|   ...    |    ... | ...                                                   |
  
 ### 04 Change knob
 
 Arguments are a string for the pedal name, a byte for which know is being altered (starting at 0) and a float for the new value.
 
+| Type     | Length | Content                                               |
+|----------|--------|-------------------------------------------------------|
+|  Byte    |      1 | (String length??)                                     |
+|  String  |      x | Pedal name                                            |
+|  Byte    |      1 | Knob ref number                                       |
+|  Float   |      4 | Knob value                                            |
+
 ### 15 Enable/disable a pedal
 
-   There is no consensus on what "True" value means, for different positions (maybe even pedals?) it is different.
+| Type     | Length | Content                                               |
+|----------|--------|-------------------------------------------------------|
+|  Byte    |      1 | (String length??)                                     |
+|  String  |      x | Pedal name                                            |
+|  Boolean |      1 | Pedal on / off                                        |
 
-   | Position       | Active     | Disabled   |
-   |----------------|------------|------------|
-   | 0 (noise gate) | 42 (True)  | 43 (False) |
-   | 1 (compressor) | 42 (True)  | 43 (False) |
-   | 2 (distortion) | 43 (False) | 42 (True)  |
-   | 3 (amp)        | -          | -          |
-   | 4 (chorus)     | 43 (False) | 42 (True)  |
-   | 5 (delay)      | 43 (False) | 42 (True)  |
+There is no consensus on what "True" value means, for different positions (maybe even pedals?) it is different.
+
+| Position       | Active     | Disabled   |
+|----------------|------------|------------|
+| 0 (noise gate) | 42 (True)  | 43 (False) |
+| 1 (compressor) | 42 (True)  | 43 (False) |
+| 2 (distortion) | 43 (False) | 42 (True)  |
+| 3 (amp)        | -          | -          |
+| 4 (chorus)     | 43 (False) | 42 (True)  |
+| 5 (delay)      | 43 (False) | 42 (True)  |
 
 ### 38 Change preset
 
 Only argument is an integer for which preset to select (0-3)
+
+| Type     | Length | Content                                               |
+|----------|--------|-------------------------------------------------------|
+|  Integer |      2 | Preset reference (0-3)                                |
 
 ## GET Operations
 
