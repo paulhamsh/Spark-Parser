@@ -251,7 +251,6 @@ This has the command 0x04, the same sequence number as the original packet and a
 
 ## Compressors
 
-|---------------------|
 | LA2AComp            |
 | BlueComp            |
 | Compressor          |
@@ -260,7 +259,6 @@ This has the command 0x04, the same sequence number as the original packet and a
 
 ## Drive
 
-|---------------------|
 | Booster             |
 | DistortionTS9       |
 | Overdrive           |
