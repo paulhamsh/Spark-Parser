@@ -251,6 +251,8 @@ This has the command 0x04, the same sequence number as the original packet and a
 
 ## Compressors
 
+| Name                |
+|---------------------|
 | LA2AComp            |
 | BlueComp            |
 | Compressor          |
