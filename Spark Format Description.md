@@ -182,18 +182,18 @@ A new present is a multi-packet message.
 
 | Type     | Length | Content                                               |
 |----------|--------|-------------------------------------------------------|
-|  Byte    |      1 | Number of packets ?                                   |
-|  Byte    |      1 |                                                       |
-|  Byte    |      1 |                                                       |
-|  Byte    |      1 |                                                       |
-|  Byte    |      1 |                                                       |
+|  Byte    |      1 | Number of packets (0- )                               |
+|  Byte    |      1 | This packet reference (0- )                           |
+|  Byte    |      1 | ??                                                    |
+|  Byte    |      1 | ??                                                    |
+|  Byte    |      1 | ??                                                    |
 |  UUID    |     36 | UUID for preset                                       |
 |  String  |      x | Preset name                                           |
 |  String  |      x | Version                                               |
 |  String  |      x | Preset description                                    |
 |  String  |      x | Icon name ??                                          |
-|  Float   |      4 |                                                       |
-|  Byte    |      1 |                                                       |
+|  Float   |      4 | ??                                                    |
+|  Byte    |      1 | ??                                                    |
 
 Followed by information for each pedal / amp:
 
