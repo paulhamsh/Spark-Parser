@@ -1,4 +1,5 @@
 # Reverse engineering the bluetooth message format used for app <-> amp communications
+
 By ytsibizov
 Additional information from paulhamsh
 
