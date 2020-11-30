@@ -199,7 +199,7 @@ Each pedal header is followed by data for each know / switch:
 |  Byte    |      1 | Value reference (starts at 0)                         |
 |  Byte    |      1 | 11???                                                 |
 |  Float   |      4 | Value to set                                          |
-|----------|--------|-------------------------------------------------------|
+|          |        |                                                       |
 |  Byte    |      1 | Value reference (starts at 0)                         |
 |  Byte    |      1 | 11???                                                 |
 |  Float   |      4 | Value to set                                          |
