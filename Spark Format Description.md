@@ -329,7 +329,7 @@ These are the messages sent when the app connects to the Spark amp
 | To Spark    | 02       | 24           |                          | Bytes: 14,0,1,2,3
 | To Spark    | 02       | 23           | Get serial number        | 
 | From Spark  | 03       | 23           |                          | D, String: Serial number with 'w' at end
-| To Spark    | 02       | 01           | Get preset configuration | Lost of 00
+| To Spark    | 02       | 01           | Get preset configuration | Lots of 00
 | From Spark  | 03       | 01           |                          | 
 
 
