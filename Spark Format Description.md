@@ -1,12 +1,12 @@
-# Reverse engineering the bluetooth message format used for app <-> amp communications
+# Reverse engineering the bluetooth message format used for app to amp communications
 
-By ytsibizov
-Additional information from paulhamsh
+By ytsibizov.
+Additional information from paulhamsh.
 
 Messages are exhcanged in the data frame format.
-When the app sends a message then the Spark responds with an acknowledgemnent
+When the app sends a message then the Spark responds with an acknowledgemnent.
 
-Large transfers (such as a new preset) are sent in packets of length 0xad (173 decimal)
+Large transfers (such as a new preset) are sent in packets of length 0xad (173 decimal).
 
 # Data frame format
 
