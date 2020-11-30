@@ -67,17 +67,17 @@ Sequence number
 
 Sequence number follow-on
 
-| Offset |  13                          |  
-|--------|------------------------------|
-| Data   |  sequence number follow-on ??|
+| Offset |  13                           |  
+|--------|-------------------------------|
+| Data   |  sequence number follow-on ?? |
 
 It is known (from the existing working code) that this number is never checked by the amp.
 
-Command and parameter
+Command and sub-command
 
-| Offset |  14       |  15       |
-|--------|-----------|-----------|
-| Data   | command   | parameter |
+| Offset |  14       |  15         |
+|--------|-----------|-------------|
+| Data   | command   | sub-command |
 
 This is then followed by the message body (see below)
 
@@ -132,7 +132,7 @@ It appears that strings are the only variable length data sequence and the only 
 
 | Value      | Length   | Type                             |
 |------------|----------|----------------------------------|
-| 00    ??   |        2 | Integer number, big endian ??    |
+| 00 ??      |        2 | Integer number, big endian ??    |
 | 20 - 3f    | variable | String of length argument - 0x20 |
 | 42         |        1 | Boolean "True"                   |
 | 43         |        1 | Boolean "False"                  |
@@ -141,25 +141,25 @@ It appears that strings are the only variable length data sequence and the only 
 
 ## Command types
 
-| Value | Operation  |
-|-------|------------|
-|  00   | Info       |
-|  01   | Set        |
-|  02   | Get        | 
-|  03   | Response ??|
-|  04   | Ack        |
-|  f0   | Sequence ??| 
+| Value | Command     |
+|-------|-------------|
+|  00   | Info        |
+|  01   | Set         |
+|  02   | Get         | 
+|  03   | Response ?? |
+|  04   | Ack         |
+|  f0   | Sequence ?? | 
 
 
-## INFO Operation
+## INFO command
 
-The only known operation is 
+The only known sub-command is 
 
 02 23  - Get hardware ID
 
 ???
 
-## SET operation
+## SET command
 
 Following SET operations are known:
 
@@ -172,13 +172,13 @@ Following SET operations are known:
 | 15        | Enable/disable a pedal | String: pedal name, Boolean: on/off
 | 38        | Change to preset       | Int: preset number (0 - 3)
 
-### 01 Send preset
+### 01 Send preset sub-command
 
 A new present is a multi-packet message.
 
 | Type     | Length | Content                                               |
 |----------|--------|-------------------------------------------------------|
-|  Byte    |      1 |  Number of packets ?                                  |
+|  Byte    |      1 | Number of packets ?                                   |
 |  Byte    |      1 |                                                       |
 |  Byte    |      1 |                                                       |
 |  Byte    |      1 |                                                       |
@@ -197,34 +197,34 @@ Followed by information for each pedal / amp:
 |----------|--------|-------------------------------------------------------|
 |  String  |      x | Pedal name                                            |
 |  Boolean |      1 | On/off                                                |
-|  Byte    |      1 | Number of knob values following (+0x10)               |
+|  Byte    |      1 | Number of parameters following (+0x10)                |
 
-Each pedal header is followed by data for each knob / switch:
+Each pedal header is followed by values for each pedal parameter:
 
 | Type     | Length | Content                                               |
 |----------|--------|-------------------------------------------------------|
-|  Byte    |      1 | Knob reference (starts at 0)                          |
-|  Byte    |      1 | 11???                                                 |
-|  Float   |      4 | Knob value                                            |
+|  Byte    |      1 | Parameter reference (starts at 0)                     |
+|  Byte    |      1 | 11 ??                                                 |
+|  Float   |      4 | Parameter value                                       |
 |          |        |                                                       |
-|  Byte    |      1 | Knob reference (starts at 0)                          |
-|  Byte    |      1 | 11???                                                 |
-|  Float   |      4 | Knob value                                            |
+|  Byte    |      1 | Parameter reference (starts at 0)                     |
+|  Byte    |      1 | 11 ??                                                 |
+|  Float   |      4 | Parameter value                                       |
 |          |        |                                                       |
 |   ...    |    ... | ...                                                   |
  
-### 04 Change knob
+### 04 Change knob sub-command
 
-Arguments are a string for the pedal name, a byte for which know is being altered (starting at 0) and a float for the new value.
+Arguments are a string for the pedal name, a byte for which parameter is being altered (starting at 0) and a float for the new value.
 
 | Type     | Length | Content                                               |
 |----------|--------|-------------------------------------------------------|
-|  Byte    |      1 | (String length??)                                     |
+|  Byte    |      1 | (String length ??)                                    |
 |  String  |      x | Pedal name                                            |
-|  Byte    |      1 | Knob ref number                                       |
-|  Float   |      4 | Knob value                                            |
+|  Byte    |      1 | Parameter reference                                   |
+|  Float   |      4 | Parameter value                                       |
 
-### 15 Enable/disable a pedal
+### 15 Enable/disable a pedal sub-command
 
 | Type     | Length | Content                                               |
 |----------|--------|-------------------------------------------------------|
@@ -243,7 +243,7 @@ There is no consensus on what "True" value means, for different positions (maybe
 | 4 (chorus)     | 43 (False) | 42 (True)  |
 | 5 (delay)      | 43 (False) | 42 (True)  |
 
-### 38 Change preset
+### 38 Change preset sub-command
 
 Only argument is an integer for which preset to select (0-3)
 
@@ -251,7 +251,7 @@ Only argument is an integer for which preset to select (0-3)
 |----------|--------|-------------------------------------------------------|
 |  Integer |      2 | Preset reference (0-3)                                |
 
-## GET Operations
+## GET Commands
 
 Following GET operations are known:
 
@@ -269,7 +269,7 @@ Multiple arguments, only first one is actually used
  - 34x "0x00" (that is 11x "Integer number, value 0" + 0x00)
  ???
 
-## ACK packets
+## ACK packet
 
 After a successful operation, amp sends back an "ack" packet.
 This has the command 0x04, the same sequence number as the original packet and a parameter the same as the parameter sent to the Spark
