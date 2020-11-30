@@ -183,15 +183,15 @@ A new present is a multi-packet message.
 |  String  |      x | Icon name ??                                          |
 |  Float   |      4 |                                                       |
 |  Byte    |      1 |                                                       |
-
+|----------|--------|-------------------------------------------------------|
 |  String  |      x | Pedal name                                            |
 |  Boolean |      1 | On/off                                                |
 |  Byte    |      1 | Number of values (+0x10)                              |
-
+|----------|--------|-------------------------------------------------------|
 |  Byte    |      1 | Value reference (starts at 0)                         |
 |  Byte    |      1 | 11???                                                 |
 |  Float   |      4 | Value to set                                          |
-
+|----------|--------|-------------------------------------------------------|
 |  Byte    |      1 | Value reference (starts at 0)                         |
 |  Byte    |      1 | 11???                                                 |
 |  Float   |      4 | Value to set                                          |
