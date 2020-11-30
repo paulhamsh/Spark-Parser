@@ -229,11 +229,11 @@ Only argument is an integer for which preset to select (0-3)
 
 Following GET operations are known:
 
-| Parameter |                       |
-|-----------|-----------------------|
-|  01       | Get preset configuration
-|  02       |
-|  11       | Get device name
+| Parameter |                          |
+|-----------|--------------------------|
+|  01       | Get preset configuration |
+|  02       |                          |
+|  11       | Get device name          |
 
 ### 01 Get preset configuration
 
@@ -271,5 +271,5 @@ This has the command 0x04, the same sequence number as the original packet and a
 | BassBigMuff         |
 | GuitarMuff          |
 | MaestroBassmaster   |
+| SABdriver           |
 
-SABdriver
