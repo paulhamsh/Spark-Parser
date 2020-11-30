@@ -176,7 +176,7 @@ Following SET operations are known:
 |-------------|------------------------|-----------------------------------------------------------
 | 01          | Send preset            | *UUID*, preset name, version, description, *float*, *byte*, noisegate name, boolean, ?,?, float, 
 | 02          | Change value  ??       | ??
-| 04          | Change knob            | String: pedal name, Byte: knob reference, Float: new value
+| 04          | Change parameter       | String: pedal name, Byte: parameter reference, Float: new value
 | 06          | Change pedal           | String: old pedal name, String: new pedal name
 | 15          | Enable/disable a pedal | String: pedal name, Boolean: on/off
 | 23          |                        |
@@ -231,7 +231,7 @@ Each pedal header is followed by values for each pedal parameter:
 |          |        |                                                       |
 |   ...    |    ... | ...                                                   |
  
-### 04 Change knob sub-command
+### 04 Change parameter (the value of a switch / dial on a pedal) sub-command
 
 Arguments are a string for the pedal name, a byte for which parameter is being altered (starting at 0) and a float for the new value.
 
