@@ -61,9 +61,15 @@ Fixed
 
 Sequence number
 
-| Offset |  12              |  13                  |
-|--------|------------------|----------------------|
-| Data   |  sequence number |  sequence number (?) |
+| Offset |  12              |  
+|--------|------------------|
+| Data   |  sequence number |
+
+Sequence number follow-on
+
+| Offset |  13                          |  
+|--------|------------------------------|
+| Data   |  sequence number follow-on ??|
 
 It is known (from the existing working code) that this number is never checked by the amp.
 
@@ -127,7 +133,7 @@ It appears that strings are the only variable length data sequence and the only 
 
 | Value      | Length   | Type                             |
 |------------|----------|----------------------------------|
-| 00    ??   |        2 | Integer number, big endian       |
+| 00    ??   |        2 | Integer number, big endian ??    |
 | 20 - 3f    | variable | String of length argument - 0x20 |
 | 42         |        1 | Boolean "True"                   |
 | 43         |        1 | Boolean "False"                  |
@@ -243,7 +249,7 @@ Multiple arguments, only first one is actually used
  - Integer number - Preset number starting 0, or 0x0100 for "current"
  - 34x "0x00" (that is 11x "Integer number, value 0" + 0x00)
 
-## "ACK" packets
+## ACK packets
 
 After a successful operation, amp sends back an "ack" packet.
 This has the command 0x04, the same sequence number as the original packet and a parameter the same as the parameter sent to the Spark
