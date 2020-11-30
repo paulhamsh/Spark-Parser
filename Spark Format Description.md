@@ -98,23 +98,23 @@ Strings have their length as their first byte (stored as 0x20 + length).
 
 An example is shown below, with each new data sequence on a new line. The bit expansion is the format byte with the bits reversed, to show where the new sequence starts:
 ```
-        F1   D1 D2 D3 D4   D5 D6 D7               Reversed bit expansion of F1
-        02   xx                                   0100 000x
-                2b 52 6f   79 61 62 x
-        40   20 43 72 6f   77 6e                  0000 001x
-                                 23 
-        08   30 2e 37                             0001 000x
-                      27   31 2d 43 
-        10   6c 65 61 6e                          0000 100x
-                           28 69 63
-        40   6f 63 2e 70   6e 67                  0000 001x
-                                 4a 
-        32   42                                   0100 110x 
-                70 00 00   
-                           17 
-                              2e 62        
-        00   69 61 73 2e   6e 6f 69               0000 000x
-        40   73 65 67 61   74 65                  0000 001x
+     F1   D1 D2 D3 D4   D5 D6 D7               Reversed bit expansion of F1
+     02   xx                                   0100 000x
+             2b 52 6f   79 61 62 x
+     40   20 43 72 6f   77 6e                  0000 001x
+                              23 
+     08   30 2e 37                             0001 000x
+                   27   31 2d 43 
+     10   6c 65 61 6e                          0000 100x
+                        28 69 63
+     40   6f 63 2e 70   6e 67                  0000 001x
+                              4a 
+     32   42                                   0100 110x 
+             70 00 00   
+                        17 
+                           2e 62        
+     00   69 61 73 2e   6e 6f 69               0000 000x
+     40   73 65 67 61   74 65                  0000 001x
                                  xx
 ```
 
