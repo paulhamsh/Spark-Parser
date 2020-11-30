@@ -8,7 +8,7 @@ When the app sends a message then the Spark responds with an acknowledgemnent.
 
 Large transfers (such as a new preset) are sent in packets of length 0xad (173 decimal).
 
-# Data frame format
+# Data message format
 
 All numbers in hexadecimal
 
@@ -28,44 +28,44 @@ All numbers in hexadecimal
 
 ## Data frame elements
 
-Header
+### Header
 
 | Offset | 00 | 01 | 02 | 03 |
 |--------|----|----|----|----|
 | Data   | 01 | fe | 00 | 00 |
 
-Direction 
+### Direction 
 
 | Offset | 04 | 05 | Description         |
 |--------|----|----|---------------------|
 | Data   | 41 | ff | Received from Spark |
 | Data   | 53 | fe | Sent to Spark       |
 
-Size of message
+### Size of message
 
 | Offset | 06     | Description                |
 |--------|--------|----------------------------|
 | Data   | length | Number of bytes in message |
 
-Zeros
+### Zeros
 
 | Offset | 07 | 08 | 09 | 0A | 0B | 0C | 0D | 0E | 0F |
 |--------|----|----|----|----|----|----|----|----|----|
 | Data   | 00 | 00 | 00 | 00 | 00 | 00 | 00 | 00 | 00 |
 
-Fixed
+### Fixed
 
 | Offset | 10 | 11 |
 |--------|----|----|
 | Data   | f0 | 01 |
 
-Sequence number
+### Sequence number
 
 | Offset |  12              |  
 |--------|------------------|
 | Data   |  sequence number |
 
-Sequence number follow-on
+### Sequence number follow-on
 
 | Offset |  13                           |  
 |--------|-------------------------------|
@@ -73,7 +73,7 @@ Sequence number follow-on
 
 It is known (from the existing working code) that this number is never checked by the amp.
 
-Command and sub-command
+### Command and sub-command
 
 | Offset |  14       |  15         |
 |--------|-----------|-------------|
@@ -81,7 +81,7 @@ Command and sub-command
 
 This is then followed by the message body (see below)
 
-Trailer
+### Trailer
 
 | Offset | xx |
 |--------|----|
@@ -89,7 +89,7 @@ Trailer
 
 
 
-## Body structure
+## Message body
 
 The body of the message made of sequences of 8 bytes - 1 format byte and then 7 bytes of data. 
 Arguments are sequential in the data sequence and the format byte shows where new a new argument starts.
@@ -139,7 +139,7 @@ It appears that strings are the only variable length data sequence and the only 
 | 4a         |        4 | Float                            | 
 
 
-## Command types
+## Commands
 
 | Value | Command     |
 |-------|-------------|
