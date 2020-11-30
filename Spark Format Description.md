@@ -97,7 +97,7 @@ Each bit maps to a byte in the next sequence, and if the bit is set in the forma
 Strings have their length as their first byte (stored as 0x20 + length).
 
 An example is shown below, with each new data sequence on a new line. The bit expansion is the format byte with the bits reversed, to show where the new sequence starts:
-
+```
         F1   D1 D2 D3 D4   D5 D6 D7               Reversed bit expansion of F1
         02   xx                                   0100 000x
                 2b 52 6f   79 61 62 x
@@ -116,15 +116,17 @@ An example is shown below, with each new data sequence on a new line. The bit ex
         00   69 61 73 2e   6e 6f 69               0000 000x
         40   73 65 67 61   74 65                  0000 001x
                                  xx
+```
 
 Which translates to:  
 
-```     String: Royal Crown   
+```
+     String: Royal Crown   
      String: 0.7  
      String: 1-Clean  
      String: icon.png  
-     Float 42 70 00 00  
-     Byte: 17  
+     Float:  42 70 00 00  
+     Byte:   17  
      String: .bias.noisegate  
 ```
 
