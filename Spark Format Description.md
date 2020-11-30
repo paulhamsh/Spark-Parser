@@ -2,6 +2,11 @@
 By ytsibizov
 Additional information from paulhamsh
 
+Messages are exhcanged in the data frame format.
+When the app sends a message then the Spark responds with an acknowledgemnent
+
+Large transfers (such as a new preset) are sent in packets of length 0xad (173 decimal)
+
 ## Data frame format
 
 All numbers in hexadecimal
@@ -13,7 +18,8 @@ All numbers in hexadecimal
 |     06 |      1 | Size of message (including the 6 byte header)         |
 |     07 |      9 | Zeros                                                 |
 |     10 |      2 | Fixed f001                                            |
-|     12 |      2 | Sequence number                                       |
+|     12 |      1 | Sequence number                                       |
+|     13 |      1 | Sequnce number follow on?????                         |
 |     14 |      1 | Command                                               |
 |     15 |      1 | Parameter                                             |
 |     16 |        | Message body                                          |
@@ -137,8 +143,9 @@ It appears that strings are the only variable length data sequence and the only 
 |-------|------------|
 |  00   | Info       |
 |  01   | Set        |
-|  02   | Get        |
+|  02   | Get        | 
 |  03   | Response ??|
+|  04   | Ack        |
 |  f0   | Sequence ??| 
 
 
@@ -197,12 +204,8 @@ Multiple arguments, only first one is actually used
 
 ## "ACK" packets
 
-After a successful operation, amp sends back an "ack" packet with
-
-Command = 0x00 (info)
-Parameter = 0x04
-Value = 0x15
-
+After a successful operation, amp sends back an "ack" packet.
+This has the command 0x04, the same sequence number as the original packet and a parameter the same as the parameter sent to the Spark
 
 ## Pedal names
 
@@ -215,6 +218,7 @@ BassComp
 BBEOpticalComp
 
 ##Drive
+
 Booster
 DistortionTS9
 Overdrive
