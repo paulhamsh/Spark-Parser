@@ -183,10 +183,18 @@ A new present is a multi-packet message.
 |  String  |      x | Icon name ??                                          |
 |  Float   |      4 |                                                       |
 |  Byte    |      1 |                                                       |
+
+Followed by information for each pedal / amp:
+
+| Type     | Length | Content                                               |
 |----------|--------|-------------------------------------------------------|
 |  String  |      x | Pedal name                                            |
 |  Boolean |      1 | On/off                                                |
 |  Byte    |      1 | Number of values (+0x10)                              |
+
+Each pedal header is followed by data for each know / switch:
+
+| Type     | Length | Content                                               |
 |----------|--------|-------------------------------------------------------|
 |  Byte    |      1 | Value reference (starts at 0)                         |
 |  Byte    |      1 | 11???                                                 |
@@ -241,22 +249,25 @@ This has the command 0x04, the same sequence number as the original packet and a
 
 ## Pedal names
 
-##Compressors
+## Compressors
 
-LA2AComp
-BlueComp
-Compressor
-BassComp
-BBEOpticalComp
+|---------------------|
+| LA2AComp            |
+| BlueComp            |
+| Compressor          |
+| BassComp            |
+| BBEOpticalComp      |
 
-##Drive
+## Drive
 
-Booster
-DistortionTS9
-Overdrive
-Fuzz
-ProCoRat
-BassBigMuff
-GuitarMuff
-MaestroBassmaster
+|---------------------|
+| Booster             |
+| DistortionTS9       |
+| Overdrive           |
+| Fuzz                |
+| ProCoRat            |
+| BassBigMuff         |
+| GuitarMuff          |
+| MaestroBassmaster   |
+
 SABdriver
