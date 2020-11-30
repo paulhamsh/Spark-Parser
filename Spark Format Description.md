@@ -172,14 +172,16 @@ The only known sub-command is
 
 Following SET operations are known:
 
-| Parameter | Description            | Arguments
-|-----------|------------------------|-----------------------------------------------------------
-| 01        | Send preset            | *UUID*, preset name, version, description, *float*, *byte*, noisegate name, boolean, ?,?, float, 
-| 02        | Change value  ??       | ??
-| 04        | Change knob            | String: pedal name, Byte: knob reference, Float: new value
-| 06        | Change pedal           | String: old pedal name, String: new pedal name
-| 15        | Enable/disable a pedal | String: pedal name, Boolean: on/off
-| 38        | Change to preset       | Int: preset number (0 - 3)
+| Sub-command | Description            | Arguments
+|-------------|------------------------|-----------------------------------------------------------
+| 01          | Send preset            | *UUID*, preset name, version, description, *float*, *byte*, noisegate name, boolean, ?,?, float, 
+| 02          | Change value  ??       | ??
+| 04          | Change knob            | String: pedal name, Byte: knob reference, Float: new value
+| 06          | Change pedal           | String: old pedal name, String: new pedal name
+| 15          | Enable/disable a pedal | String: pedal name, Boolean: on/off
+| 23          |                        |
+| 24          |                        |
+| 38          | Change to preset       | Int: preset number (0 - 3)
 
 ### 01 Send preset sub-command
 
@@ -271,11 +273,11 @@ Only argument is an integer for which preset to select (0-3)
 
 Following GET operations are known:
 
-| Parameter |                          |
-|-----------|--------------------------|
-|  01       | Get preset configuration |
-|  02       | ???                      |
-|  11       | Get device name          |
+| Sub-command |                          |
+|-------------|--------------------------|
+|  01         | Get preset configuration |
+|  02         | ???                      |
+|  11         | Get device name          |
 
 ### 01 Get preset configuration
 
@@ -288,7 +290,7 @@ Multiple arguments, only first one is actually used
 ## ACK packet
 
 After a successful operation, amp sends back an "ack" packet.
-This has the command 0x04, the same sequence number as the original packet and a parameter the same as the parameter sent to the Spark
+This has the command 0x04, the same sequence number as the original packet and a sub-command the same as the sub-command sent to the Spark
 
 ## Pedal names
 
@@ -315,4 +317,19 @@ This has the command 0x04, the same sequence number as the original packet and a
 | GuitarMuff          |
 | MaestroBassmaster   |
 | SABdriver           |
+
+# Connect messages
+
+These are the messages sent when the app connects to the Spark amp
+
+| Direction   | Command  | Sub-command  |  Operation               | Description
+|-------------|----------|--------------|--------------------------|------------------------------------
+| To Spark    | 02       | 11           | Get amp name             |             
+| From Spark  | 03       | 11           |                          | Byte: 08 String: Spark 40
+| To Spark    | 02       | 24           |                          | Bytes: 14,0,1,2,3
+| To Spark    | 02       | 23           | Get serial number        | 
+| From Spark  | 03       | 23           |                          | D, String: Serial number with 'w' at end
+| To Spark    | 02       | 01           | Get preset configuration | Lost of 00
+| From Spark  | 03       | 01           |                          | 
+
 
