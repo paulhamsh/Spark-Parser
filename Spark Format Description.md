@@ -7,7 +7,7 @@ When the app sends a message then the Spark responds with an acknowledgemnent
 
 Large transfers (such as a new preset) are sent in packets of length 0xad (173 decimal)
 
-## Data frame format
+# Data frame format
 
 All numbers in hexadecimal
 
@@ -70,7 +70,7 @@ Command and parameter
 
 | Offset |  14       |  15       |
 |--------|-----------|-----------|
-| Data   | operation | parameter |
+| Data   | command   | parameter |
 
 This is then followed by the message body (see below)
 
@@ -79,8 +79,6 @@ Trailer
 | Offset | xx |
 |--------|----|
 | Data   | f7 |
-
-## Command and parameter
 
 
 
@@ -123,8 +121,6 @@ Which translates to:
      String: .bias.noisegate
 
 It appears that strings are the only variable length data sequence and the only sequence that starts with a length
-
-## Arguments
 
 ### Argument types
 
@@ -169,6 +165,27 @@ Following SET operations are known:
 | 15        | Enable/disable a pedal | String: pedal name, Boolean: on/off
 | 38        | Change to preset       | Int: preset number (0 - 3)
 
+### 01 Send preset
+
+A new present is a multi-packet message.
+
+| Type    | Length | Content                                               |
+|---------|--------|-------------------------------------------------------|
+|  Byte   |      x |                                                       |
+|  Byte   |      x |                                                       |
+|  Byte   |      x |                                                       |
+|  UUID   |      x |                                                       |
+|  String |      x |                                                       |
+|  String |      x |                                                       |
+|  String |      x |                                                       |
+|  String |      x |                                                       |
+|         |      x |                                                       |
+|         |        |                                                       |
+|         |      x |                                                       |
+ 
+### 04 Change knob
+
+Arguments are a string for the pedal name, a byte for which know is being altered (starting at 0) and a float for the new value.
 
 ### 15 Enable/disable a pedal
 
@@ -183,7 +200,9 @@ Following SET operations are known:
    | 4 (chorus)     | 43 (False) | 42 (True)  |
    | 5 (delay)      | 43 (False) | 42 (True)  |
 
+### 38 Change preset
 
+Only argument is an integer for which preset to select (0-3)
 
 ## GET Operations
 
