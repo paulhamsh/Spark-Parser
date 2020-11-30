@@ -61,6 +61,9 @@ All numbers in hexadecimal
 
 ### Sequence number
 
+This remains the same for a multi-packet message.   
+It is also used in the acknowledgement message.   
+
 | Offset |  12              |  
 |--------|------------------|
 | Data   |  sequence number |
@@ -75,11 +78,13 @@ It is known (from the existing working code) that this number is never checked b
 
 ### Command and sub-command
 
+The command is also used in the acknowledgement message.  
+
 | Offset |  14       |  15         |
 |--------|-----------|-------------|
 | Data   | command   | sub-command |
 
-This is then followed by the message body (see below)
+This is then followed by the message body (see below)  
 
 ### Trailer
 
@@ -178,12 +183,19 @@ Following SET operations are known:
 
 ### 01 Send preset sub-command
 
-A new present is a multi-packet message.
+A new preset is a multi-packet message.   
+Each packet starts with two bytes for the total number of packets and which packet this is.  
+Each packet also has the same sequence number in the header.   
 
 | Type     | Length | Content                                               |
 |----------|--------|-------------------------------------------------------|
-|  Byte    |      1 | Number of packets (0- )                               |
-|  Byte    |      1 | This packet reference (0- )                           |
+|  Byte    |      1 | Number of packets in total (1- )                      |
+|  Byte    |      1 | Reference for this packet (0- )                       |
+
+Followed by:
+
+| Type     | Length | Content                                               |
+|----------|--------|-------------------------------------------------------|
 |  Byte    |      1 | ??                                                    |
 |  Byte    |      1 | ??                                                    |
 |  Byte    |      1 | ??                                                    |
