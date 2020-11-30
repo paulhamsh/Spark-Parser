@@ -197,9 +197,9 @@ Followed by information for each pedal / amp:
 |----------|--------|-------------------------------------------------------|
 |  String  |      x | Pedal name                                            |
 |  Boolean |      1 | On/off                                                |
-|  Byte    |      1 | Number of knob values (+0x10)                         |
+|  Byte    |      1 | Number of knob values following (+0x10)               |
 
-Each pedal header is followed by data for each know / switch:
+Each pedal header is followed by data for each knob / switch:
 
 | Type     | Length | Content                                               |
 |----------|--------|-------------------------------------------------------|
