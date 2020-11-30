@@ -169,19 +169,32 @@ Following SET operations are known:
 
 A new present is a multi-packet message.
 
-| Type    | Length | Content                                               |
-|---------|--------|-------------------------------------------------------|
-|  Byte   |      x |                                                       |
-|  Byte   |      x |                                                       |
-|  Byte   |      x |                                                       |
-|  UUID   |      x |                                                       |
-|  String |      x |                                                       |
-|  String |      x |                                                       |
-|  String |      x |                                                       |
-|  String |      x |                                                       |
-|         |      x |                                                       |
-|         |        |                                                       |
-|         |      x |                                                       |
+| Type     | Length | Content                                               |
+|----------|--------|-------------------------------------------------------|
+|  Byte    |      1 |  Number of packets ?                                  |
+|  Byte    |      1 |                                                       |
+|  Byte    |      1 |                                                       |
+|  Byte    |      1 |                                                       |
+|  Byte    |      1 |                                                       |
+|  UUID    |     36 | UUID for preset                                       |
+|  String  |      x | Preset name                                           |
+|  String  |      x | Version                                               |
+|  String  |      x | Preset description                                    |
+|  String  |      x | Icon name ??                                          |
+|  Float   |      4 |                                                       |
+|  Byte    |      1 |                                                       |
+
+|  String  |      x | Pedal name                                            |
+|  Boolean |      1 | On/off                                                |
+|  Byte    |      1 | Number of values (+0x10)                              |
+
+|  Byte    |      1 | Value reference (starts at 0)                         |
+|  Byte    |      1 | 11???                                                 |
+|  Float   |      4 | Value to set                                          |
+
+|  Byte    |      1 | Value reference (starts at 0)                         |
+|  Byte    |      1 | 11???                                                 |
+|  Float   |      4 | Value to set                                          |
  
 ### 04 Change knob
 
