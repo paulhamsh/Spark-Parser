@@ -119,14 +119,14 @@ An example is shown below, with each new data sequence on a new line. The bit ex
 
 Which translates to:  
 
-`     String: Royal Crown  
+```     String: Royal Crown   
      String: 0.7  
      String: 1-Clean  
      String: icon.png  
      Float 42 70 00 00  
      Byte: 17  
      String: .bias.noisegate  
-`
+```
 
 It appears that strings are the only variable length data sequence and the only sequence that starts with a length
 
