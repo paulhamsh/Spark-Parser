@@ -1,0 +1,252 @@
+Size            173
+Sequence        63
+Sequence 2      30
+Command         1
+Parameter       1
+Send whole preset
+Total chunks  03
+This chunk    00
+Chunk 1 of 3
+Byte    00
+Byte    00
+Byte    7F
+UUID             6AF9D829-CEA7-4189-AC80-B3364A563EB4
+Preset name      Dark Soul
+Version          0.7
+Description      1-Clean
+Icon             icon.png
+Unknown value    60.00 [66, 112, 0, 0]
+Num pedals 17
+There are 7 pedals in this preset
+Pedal            bias.noisegate
+On/off           False
+Params           13
+There are 3 parameters for this pedal
+  Param          00
+  ???            11
+  Value          0.06 [61, 111, 61, 8]
+  Param          01
+  ???            11
+  Value          0.13 [62, 3, 94, 35]
+  Param          02
+  ???            11
+  Value          0.00 [0, 0, 0, 0]
+[Chunk format byte 64]
+[Chunk  2 of 3]
+[Chunk unknown 00]
+Pedal            BBEOpticalComp
+On/off           True
+Params           13
+There are 3 parameters for this pedal
+  Param          00
+  ???            11
+  Value          0.71 [63, 54, 115, 101]
+  Param          01
+  ???            11
+  Value          0.18 [62, 61, 75, 45]
+  Param          02
+  ???            11
+  Value          0.00 [0, 0, 0, 0]
+Pedal            Overdrive
+On/off           False
+Params           13
+There are 3 parameters for this pedal
+  Param          00
+  ???            11
+  Value          0.59 [63, 22, 17, 40]
+  Param          01
+  ???            11
+  Value          0.17 [62, 43, 97, 21]
+  Param          02
+  ???            11
+  Value          0.13 [62, 3, 109, 28]
+Pedal            SLO100
+On/off           False
+Params           15
+There are 5 parameters for this pedal
+  Param          00
+  ???            11
+  Value          0.59 [63, 23, 69, 81]
+  Param          01
+  ???            11
+  Value          0.51 [63, 3, 22, 71]
+  Param          02
+  ???            11
+  Value          0.58 [63, 21, 117, 19]
+  Param          03
+  ???            11
+  Value          0.14 [62, 19, 9, 48]
+  Param          04
+  ???            11
+  Value          0.51 [63, 1, 118, 111]
+Pedal            Flanger
+On/off           True
+Params           13
+There are 3 parameters for this pedal
+  Param          00
+  ???            11
+  Value          0.21 [62, 83, 92, 48]
+  Param          01
+  ???            11
+  Value          0.66 [63, 41, 61, 56]
+  Param          02
+  ???            11
+[Chunk format byte 48]
+[Chunk  3 of 3]
+[Chunk unknown 74]
+  Value          0.65 [63, 39, 57, 97]
+Pedal            DelayMono
+On/off           True
+Params           15
+There are 5 parameters for this pedal
+  Param          00
+  ???            11
+  Value          0.22 [62, 92, 69, 114]
+  Param          01
+  ???            11
+  Value          0.19 [62, 69, 15, 82]
+  Param          02
+  ???            11
+  Value          0.24 [62, 117, 19, 68]
+  Param          03
+  ???            11
+  Value          0.20 [62, 76, 76, 77]
+  Param          04
+  ???            11
+  Value          0.50 [63, 0, 0, 0]
+Pedal            bias.reverb
+On/off           False
+Params           17
+There are 7 parameters for this pedal
+  Param          00
+  ???            11
+  Value          0.17 [62, 46, 28, 32]
+  Param          01
+  ???            11
+  Value          0.81 [63, 79, 77, 105]
+  Param          02
+  ???            11
+  Value          0.15 [62, 23, 73, 6]
+  Param          03
+  ???            11
+  Value          0.15 [62, 24, 68, 106]
+  Param          04
+  ???            11
+  Value          0.58 [63, 21, 7, 80]
+  Param          05
+  ???            11
+  Value          0.65 [63, 38, 102, 103]
+  Param          06
+  ???            11
+  Value          0.20 [62, 76, 76, 77]
+skipping  58 - after preset ended
+===== Done F7 160 159 =======
+Size            26
+Sequence        1
+Sequence 2      127
+Command         1
+Parameter       56
+Change between presets
+Integer [0, 127]
+===== Done F7 27 26 =======
+
+=======================================================================================================
+
+01fe000053fead000000000000000000f001371e010124030000007f5924003641463944383200392d434541372d00343138392d41430038302d4233333600344135363345420234294461726b2010536f756c23302e023727312d436c6504616e2869636f6e502e706e674a42700c0000172e62696100732e6e6f69736530676174654313002b114a3d6f3d080103114a3e035e230243114a000000002e004242454f7074690063616c436ff7
+
+b"\x01\xfe\x00\x00S\xfe\xad\x00\x00\x00\x00\x00\x00\x00\x00\x00\xf0\x017\x1e\x01\x01$\x03\x00\x00\x00\x7fY$\x006AF9D82\x009-CEA7-\x004189-AC\x0080-B336\x004A563EB\x024)Dark \x10Soul#0.\x027'1-Cle\x04an(iconP.pngJBp\x0c\x00\x00\x17.bia\x00s.noise0gateC\x13\x00+\x11J=o=\x08\x01\x03\x11J>\x03^#\x02C\x11J\x00\x00\x00\x00.\x00BBEOpti\x00calCo\xf7"
+
+ 01 FE 00 00 53 FE AD 00
+ 00 00 00 00 00 00 00 00
+ F0 01 37 1E 01 01
+
+
+ 24    03 00 00 00 7F 59 24
+ 00    36 41 46 39 44 38 32
+ 00    39 2D 43 45 41 37 2D
+ 00    34 31 38 39 2D 41 43
+ 00    38 30 2D 42 33 33 36
+ 00    34 41 35 36 33 45 42
+ 02    34 29 44 61 72 6B 20
+ 10    53 6F 75 6C 23 30 2E
+ 02    37 27 31 2D 43 6C 65
+ 04    61 6E 28 69 63 6F 6E
+ 50    2E 70 6E 67 4A 42 70
+ 0C    00 00 17 2E 62 69 61
+ 00    73 2E 6E 6F 69 73 65
+ 30    67 61 74 65 43 13 00
+ 2B    11 4A 3D 6F 3D 08 01
+ 03    11 4A 3E 03 5E 23 02
+ 43    11 4A 00 00 00 00 2E
+ 00    42 42 45 4F 70 74 69
+ 00    63 61 6C 43 6F F7
+
+01fe000053fead000000000000000000f001370f0101640301006d7042130600114a3f3673653601114a3e3d4b2d0602114a0000000001294f76657264725869766543130011514a3f1611280111454a3e2b61150211254a3e036d1c2653604c4f31303043154600114a3f1745514601114a3f0316474602114a3f1575131603114a3e1309306604114a3f01766f0127466c616e67653672421300114a3e37535c3001114a3f12293d380211f7
+
+b"\x01\xfe\x00\x00S\xfe\xad\x00\x00\x00\x00\x00\x00\x00\x00\x00\xf0\x017\x0f\x01\x01d\x03\x01\x00mpB\x13\x06\x00\x11J?6se6\x01\x11J>=K-\x06\x02\x11J\x00\x00\x00\x00\x01)OverdrXiveC\x13\x00\x11QJ?\x16\x11(\x01\x11EJ>+a\x15\x02\x11%J>\x03m\x1c&S`LO100C\x15F\x00\x11J?\x17EQF\x01\x11J?\x03\x16GF\x02\x11J?\x15u\x13\x16\x03\x11J>\x13\t0f\x04\x11J?\x01vo\x01'Flange6rB\x13\x00\x11J>7S\\0\x01\x11J?\x12)=8\x02\x11\xf7"
+
+ 01 FE 00 00 53 FE AD 00
+ 00 00 00 00 00 00 00 00
+ F0 01 37 0F 01 01
+
+
+ 64    03 01 00 6D 70 42 13
+ 06    00 11 4A 3F 36 73 65
+ 36    01 11 4A 3E 3D 4B 2D
+ 06    02 11 4A 00 00 00 00
+ 01    29 4F 76 65 72 64 72
+ 58    69 76 65 43 13 00 11
+ 51    4A 3F 16 11 28 01 11
+ 45    4A 3E 2B 61 15 02 11
+ 25    4A 3E 03 6D 1C 26 53
+ 60    4C 4F 31 30 30 43 15
+ 46    00 11 4A 3F 17 45 51
+ 46    01 11 4A 3F 03 16 47
+ 46    02 11 4A 3F 15 75 13
+ 16    03 11 4A 3E 13 09 30
+ 66    04 11 4A 3F 01 76 6F
+ 01    27 46 6C 61 6E 67 65
+ 36    72 42 13 00 11 4A 3E
+ 37    53 5C 30 01 11 4A 3F
+ 12    29 3D 38 02 11 F7
+
+01fe000053fe9f000000000000000000f00137610101480302744a3f273902612944656c6179304d6f6e6f42150023114a3e5c45720123114a3e450f52020b114a3e751344033b114a3e4c4c4d044b114a3f0000002b00626961732e726530766572624317002b114a3e2e1c200123114a3f4f4d69022b114a3e1749060313114a3e18446a0403114a3f1507500503114a3f2666670633114a3e4c4c4d58f7
+
+b"\x01\xfe\x00\x00S\xfe\x9f\x00\x00\x00\x00\x00\x00\x00\x00\x00\xf0\x017a\x01\x01H\x03\x02tJ?'9\x02a)Delay0MonoB\x15\x00#\x11J>\\Er\x01#\x11J>E\x0fR\x02\x0b\x11J>u\x13D\x03;\x11J>LLM\x04K\x11J?\x00\x00\x00+\x00bias.re0verbC\x17\x00+\x11J>.\x1c \x01#\x11J?OMi\x02+\x11J>\x17I\x06\x03\x13\x11J>\x18Dj\x04\x03\x11J?\x15\x07P\x05\x03\x11J?&fg\x063\x11J>LLMX\xf7"
+
+ 01 FE 00 00 53 FE 9F 00
+ 00 00 00 00 00 00 00 00
+ F0 01 37 61 01 01
+
+
+ 48    03 02 74 4A 3F 27 39
+ 02    61 29 44 65 6C 61 79
+ 30    4D 6F 6E 6F 42 15 00
+ 23    11 4A 3E 5C 45 72 01
+ 23    11 4A 3E 45 0F 52 02
+ 0B    11 4A 3E 75 13 44 03
+ 3B    11 4A 3E 4C 4C 4D 04
+ 4B    11 4A 3F 00 00 00 2B
+ 00    62 69 61 73 2E 72 65
+ 30    76 65 72 62 43 17 00
+ 2B    11 4A 3E 2E 1C 20 01
+ 23    11 4A 3F 4F 4D 69 02
+ 2B    11 4A 3E 17 49 06 03
+ 13    11 4A 3E 18 44 6A 04
+ 03    11 4A 3F 15 07 50 05
+ 03    11 4A 3F 26 66 67 06
+ 33    11 4A 3E 4C 4C 4D 58
+ F7   
+
+01fe000053fe1a000000000000000000f001387f013800007ff7
+
+b'\x01\xfe\x00\x00S\xfe\x1a\x00\x00\x00\x00\x00\x00\x00\x00\x00\xf0\x018\x7f\x018\x00\x00\x7f\xf7'
+
+ 01 FE 00 00 53 FE 1A 00
+ 00 00 00 00 00 00 00 00
+ F0 01 38 7F 01 38
+
+
+ 00    00 7F F7
+
+
