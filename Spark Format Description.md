@@ -197,12 +197,12 @@ Each packet also has the same sequence number in the header.
 |----------|--------|-------------------------------------------------------|
 |  Byte    |      1 | Number of packets in total (1- )                      |
 |  Byte    |      1 | Reference for this packet (0- )                       |
+|  Byte    |      1 | ??                                                    |
 
 Followed by:
 
 | Type     | Length | Content                                               |
 |----------|--------|-------------------------------------------------------|
-|  Byte    |      1 | ??                                                    |
 |  Byte    |      1 | ??                                                    |
 |  Byte    |      1 | ??                                                    |
 |  UUID    |     36 | UUID for preset                                       |
@@ -244,7 +244,18 @@ Arguments are a string for the pedal name, a byte for which parameter is being a
 |  Byte    |      1 | (String length ??)                                    |
 |  String  |      x | Pedal name                                            |
 |  Byte    |      1 | Parameter reference                                   |
-|  Float   |      4 | Parameter value                                       |
+|  Float   |      4 | Parameter value (0.xx represents x.x in UI)           |
+
+### 06 Swap pedals sub-command
+
+Arguments are a string for the current pedal name, and string for new pedal name.
+
+| Type     | Length | Content                                               |
+|----------|--------|-------------------------------------------------------|
+|  Byte    |      1 | (String length ??)                                    |
+|  String  |      x | Old pedal name                                        |
+|  Byte    |      1 | (String length ??)                                    |
+|  Float   |      4 | New pedal name                                        |
 
 ### 15 Enable/disable a pedal sub-command
 
