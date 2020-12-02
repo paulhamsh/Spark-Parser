@@ -104,7 +104,7 @@ Strings have their length as their first byte (stored as 0x20 + length).
 An example is shown below, with each new data sequence on a new line. The bit expansion is the format byte with the bits reversed, to show where the new sequence starts.
 
 Exploring the data it doesn't look like the format bits are always correct.  
-It may be that each command / sub-command has a specific set of parameters and these bits are not required.  
+It seems that each command / sub-command has a specific set of parameters and these bits are not required.  
 
 ```
      F1   D1 D2 D3 D4   D5 D6 D7               Reversed bit expansion of F1
@@ -141,36 +141,27 @@ Which translates to:
 
 It appears that strings are the only variable length data sequence and the only sequence that starts with a length
 
-### Argument types
+### Data types
 
-| Value      | Length   | Type                             |
-|------------|----------|----------------------------------|
-| 00 ??      |        2 | Integer number, big endian ??    |
-| 20 - 3f    | variable | String of length argument - 0x20 |
-| 42         |        1 | Boolean "True"                   |
-| 43         |        1 | Boolean "False"                  |
-| 4a         |        4 | Float                            | 
+| Type                             |   Length |  Example                                                                              |
+|----------------------------------|----------|---------------------------------------------------------------------------------------|
+| Byte                             |        1 | 00 - ff                                                                               | 
+| Integer number, big endian ??    |        2 | 0000 - ffff                                                                           |
+| Short string                     |     1-31 | Length + 0x20, bytes of string (sometimes prefixed by length, then length + 0x20 etc) |
+| Long string                      |     32 + | 0x59 + length + bytes of string                                                       |
+| Boolean "True"                   |        1 | 0x42                                                                                  |
+| Boolean "False"                  |        1 | 0x43                                                                                  |
+| Float                            |    4 + 1 | Prefix 0x49 + 4 bytes of floating point                                               |
 
 
 ## Commands
 
 | Value | Command     |
 |-------|-------------|
-|  00   | Info        |
 |  01   | Set         |
 |  02   | Get         | 
-|  03   | Response ?? |
 |  04   | Ack         |
-|  f0   | Sequence ?? | 
 
-
-## INFO command
-
-The only known sub-command is 
-
-02 23  - Get hardware ID
-
-???
 
 ## SET command
 
@@ -210,8 +201,8 @@ Followed by:
 |  String  |      x | Version                                               |
 |  String  |      x | Preset description                                    |
 |  String  |      x | Icon name ??                                          |
-|  Float   |      4 | ??                                                    |
-|  Byte    |      1 | ??                                                    |
+|  Float   |      4 | ??    Perhaps BPM (seems to be 60.0)                  |
+|  Byte    |      1 | ??    Perhaps number of pedals in preset              |
 
 Followed by information for each pedal / amp:
 
