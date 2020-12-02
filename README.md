@@ -15,5 +15,7 @@ I also had a version with the Core 2 as the receiver from the app, connected ove
 
 Now considering using two Core 2s connected either via the USB to a PC or together over a serial connection of some sort.
 
+Latest version (0.8) handles most of a preset being sent, but can't handle strings longer than 32 bytes - these seem to be prefixed 0x59 and I thought they were only UUIDs so need to alter the code for that. Long string = 0x59, length, string.
+
 
 Based on the work of Justin Nelson https://github.com/jrnelson90/tinderboxpedal and Yuriy Tsibizov https://github.com/ytsibizov/midibox
