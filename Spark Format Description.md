@@ -293,6 +293,7 @@ Following GET operations are known:
 |  01         | Get preset configuration |
 |  02         | ???                      |
 |  11         | Get device name          |
+|  23         | Get serial number        |
 
 ### 01 Get preset configuration
 
