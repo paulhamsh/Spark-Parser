@@ -143,15 +143,16 @@ It appears that strings are the only variable length data sequence and the only 
 
 ### Data types
 
-| Type                             |   Length |  Example                                                                              |
-|----------------------------------|----------|---------------------------------------------------------------------------------------|
-| Byte                             |        1 | 00 - ff                                                                               | 
-| Integer number, big endian ??    |        2 | 0000 - ffff                                                                           |
-| Short string                     |     1-31 | Length + 0x20, bytes of string (sometimes prefixed by length, then length + 0x20 etc) |
-| Long string                      |     32 + | 0x59 + length + bytes of string                                                       |
-| Boolean "True"                   |        1 | 0x42                                                                                  |
-| Boolean "False"                  |        1 | 0x43                                                                                  |
-| Float                            |    4 + 1 | Prefix 0x49 + 4 bytes of floating point                                               |
+| Type                             |   Length |  Example                                | Description                                                  |
+|----------------------------------|----------|-----------------------------------------|--------------------------------------------------------------|
+| Byte                             |        1 | 0x10 - 0x1f                             | Subtract 0x10 from byte to get the value                     | 
+| Integer number, big endian ??    |        2 | 0000 - ffff                             | Not sure this exists                                         |
+| Short string                     | 1 + 1-31 | 0x20 - 0x3f                             | Length + 0x20, bytes of string                               |
+| Very short sting                 | 2 + 1-15 | 0x01 - 0x0f, 0x20 - 0x2f, bytes         | Length, length + 0x20, bytes of string                       |
+| Long string                      |  2 + 32+ | 0x59, length, bytes of string           | 0x59, length, bytes of string                                |
+| Boolean "True"                   |        1 | 0x42                                    |                                                              |
+| Boolean "False"                  |        1 | 0x43                                    |                                                              |
+| Float                            |    4 + 1 | 0x4a + 4 bytes of floating point        |                                                              |
 
 
 ## Commands
