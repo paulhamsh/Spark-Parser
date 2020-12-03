@@ -160,6 +160,7 @@ It appears that strings are the only variable length data sequence and the only 
 |-------|-------------|
 |  01   | Set         |
 |  02   | Get         | 
+|  03   | Response    |
 |  04   | Ack         |
 
 
