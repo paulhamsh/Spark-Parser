@@ -22,7 +22,7 @@ All numbers in hexadecimal
 |     12 |      1 | Sequence number                                       |
 |     13 |      1 | Sequnce number follow on?????                         |
 |     14 |      1 | Command                                               |
-|     15 |      1 | Parameter                                             |
+|     15 |      1 | Sub-command                                           |
 |     16 |        | Message body                                          |
 |     ?? |      1 | End of message f7                                     |
 
