@@ -342,4 +342,4 @@ These are the messages sent when the app connects to the Spark amp
 | From Spark  | 03       | 01           |                          | 
 
 
-![Message format](Spark Data Format.jpg)
+![Screenshot](Spark Data Format.jpg)
