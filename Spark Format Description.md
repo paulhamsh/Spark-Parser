@@ -343,4 +343,4 @@ These are the messages sent when the app connects to the Spark amp
 
 
 ![Screenshot](SparkDataFormat.jpg)
-![Screenshot](http://github.com/paulhamsh/Spark-Parser/blob/main/SparkDataFormat.jpg?raw=true)
+
