@@ -3,10 +3,10 @@
 By ytsibizov.
 Additional information from paulhamsh.
 
-Messages are exhcanged in the data frame format.
+Messages are exchanged in data blocks.
 When the app sends a message then the Spark responds with an acknowledgemnent.
 
-Large transfers (such as a new preset) are sent in packets of length 0xad (173 decimal).
+Large transfers (such as a new preset) are sent in blocks of length 0xad (173 decimal).
 
 # Data message format
 
@@ -342,3 +342,4 @@ These are the messages sent when the app connects to the Spark amp
 | From Spark  | 03       | 01           |                          | 
 
 
+![Message format](Spark Data Format.jpg)
