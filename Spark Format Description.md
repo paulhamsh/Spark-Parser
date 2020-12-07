@@ -1,6 +1,6 @@
 # Reverse engineering the bluetooth message format used for app to amp communications
 
-By paulhamsh based on document from ytsibizov.
+By paulhamsh based on a description from ytsibizov.
 
 # Overview
 
