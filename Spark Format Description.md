@@ -1,15 +1,36 @@
 # Reverse engineering the bluetooth message format used for app to amp communications
 
-By ytsibizov.
-Additional information from paulhamsh.
+By paulhamsh based on document from ytsibizov.
 
-Messages are exchanged in data blocks.
-When the app sends a message then the Spark responds with an acknowledgemnent.
+# Overview
 
-Large transfers (such as a new preset) are sent in blocks of length 0xad (173 decimal).
+Messages are exchanged in data blocks. The block contains one or more chunks, each chunk carrying a part of the overall message. Blocks and chunks appear to have size limits which means messages span chunks and chunks span blocks.
+The pictures at the end may help visualise this.
+
+
+When the app sends a message then the Spark (usually) responds with an acknowledgemnent.
+
+The data sent to the Spark can span chunks, but each block only contains a single chunk.
+So the format is block header, a chunk header, the data then the chunk trailer.
+Each send block seems to have a maximum size of 0xad.
+If the data spans blocks (exmample: sending a preset) then each chunk starts three bytes showing the total number of chunks and which chunk this is.
+
+Data received from the Spark is similar but can be split over multiple blocks and multiple chunks. 
+Each receive block seems to have a maximum size of 0x6a.
+The first chunk is the acknowledgement (chunk header and chunk trailer, no data).
+
+Then the following chunks are each of 32 bytes.
+Each chunk starts with 3 bytes showing the number of the chunk.
+There doesn't appear to be a byte showing the total number of chunks in the message.
+
+Chunks can start in one block and end in the following block. Even the chunk header can be split.
+
+It isn't clear why the send and receive packets are structured differently. Or why chunks span blocks.
+
 
 # Data message format
 
+## Block header
 All numbers in hexadecimal
 
 | Offset | Length | Data                                                  |
@@ -18,15 +39,30 @@ All numbers in hexadecimal
 |     04 |      2 | Direction                                             |
 |     06 |      1 | Size of message (including the 6 byte header)         |
 |     07 |      9 | Zeros                                                 |
+
+## Chunk header
+
+| Offset | Length | Data                                                  |
+|--------|--------|-------------------------------------------------------|
 |     10 |      2 | Fixed f001                                            |
 |     12 |      1 | Sequence number                                       |
 |     13 |      1 | Sequnce number follow on?????                         |
 |     14 |      1 | Command                                               |
 |     15 |      1 | Sub-command                                           |
+
+
+## Message body
+| Offset | Length | Data                                                  |
+|--------|--------|-------------------------------------------------------|
 |     16 |        | Message body                                          |
+
+
+## Chunk trailer
+| Offset | Length | Data                                                  |
+|--------|--------|-------------------------------------------------------|
 |     ?? |      1 | End of message f7                                     |
 
-## Data frame elements
+## Block header
 
 ### Header
 
@@ -52,6 +88,8 @@ All numbers in hexadecimal
 | Offset | 07 | 08 | 09 | 0A | 0B | 0C | 0D | 0E | 0F |
 |--------|----|----|----|----|----|----|----|----|----|
 | Data   | 00 | 00 | 00 | 00 | 00 | 00 | 00 | 00 | 00 |
+
+## Chunk header
 
 ### Fixed
 
@@ -180,7 +218,7 @@ Following SET operations are known:
 | 24          |                        |
 | 38          | Change to preset       | Int: preset number (0 - 3)
 
-### 01 Send preset sub-command
+### 01 Send preset 
 
 A new preset is a multi-packet message.   
 Each packet starts with two bytes for the total number of packets and which packet this is.  
@@ -228,7 +266,7 @@ Each pedal header is followed by values for each pedal parameter:
 |          |        |                                                       |
 |   ...    |    ... | ...                                                   |
  
-### 04 Change parameter (the value of a switch / dial on a pedal) sub-command
+### 04 Change parameter (the value of a switch / dial on a pedal) 
 
 Arguments are a string for the pedal name, a byte for which parameter is being altered (starting at 0) and a float for the new value.
 
@@ -239,7 +277,7 @@ Arguments are a string for the pedal name, a byte for which parameter is being a
 |  Byte    |      1 | Parameter reference                                   |
 |  Float   |      4 | Parameter value (0.xx represents x.x in UI)           |
 
-### 06 Swap pedals sub-command
+### 06 Swap pedals
 
 Arguments are a string for the current pedal name, and string for new pedal name.
 
@@ -269,7 +307,7 @@ There is no consensus on what "True" value means, for different positions (maybe
 | 4 (chorus)     | 43 (False) | 42 (True)  |
 | 5 (delay)      | 43 (False) | 42 (True)  |
 
-### 38 Change preset sub-command
+### 38 Change preset 
 
 Only argument is an integer for which preset to select (0-3)
 
@@ -277,7 +315,7 @@ Only argument is an integer for which preset to select (0-3)
 |----------|--------|-------------------------------------------------------|
 |  Integer |      2 | Preset reference (0-3)                                |
 
-## GET Commands
+## GET Command
 
 Following GET operations are known:
 
@@ -298,10 +336,10 @@ Multiple arguments, only first one is actually used
 
 ## ACK packet
 
-After a successful operation, amp sends back an "ack" packet.
+After (most) successful operations, amp sends back an "ack" packet.
 This has the command 0x04, the same sequence number as the original packet and a sub-command the same as the sub-command sent to the Spark
 
-## Pedal names
+# Pedal names
 
 ## Compressors
 
@@ -329,13 +367,14 @@ This has the command 0x04, the same sequence number as the original packet and a
 
 # Connect messages
 
-These are the messages sent when the app connects to the Spark amp
+These are the messages sent when the app connects to the Spark amp.
+Partial list so far
 
 | Direction   | Command  | Sub-command  |  Operation               | Description
 |-------------|----------|--------------|--------------------------|------------------------------------
 | To Spark    | 02       | 11           | Get amp name             |             
 | From Spark  | 03       | 11           |                          | Byte: 08 String: Spark 40
-| To Spark    | 02       | 24           |                          | Bytes: 14,0,1,2,3
+| To Spark    | 02       | 24           | ??????                   | Bytes: 14,0,1,2,3
 | To Spark    | 02       | 23           | Get serial number        | 
 | From Spark  | 03       | 23           |                          | D, String: Serial number with 'w' at end
 | To Spark    | 02       | 01           | Get preset configuration | Lots of 00
