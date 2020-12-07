@@ -30,7 +30,7 @@ It isn't clear why the send and receive packets are structured differently. Or w
 
 # Data message format
 
-## Block header
+### Block header
 All numbers in hexadecimal
 
 | Offset | Length | Data                                                  |
@@ -40,7 +40,7 @@ All numbers in hexadecimal
 |     06 |      1 | Size of message (including the 6 byte header)         |
 |     07 |      9 | Zeros                                                 |
 
-## Chunk header
+### Chunk header
 
 | Offset | Length | Data                                                  |
 |--------|--------|-------------------------------------------------------|
@@ -51,13 +51,13 @@ All numbers in hexadecimal
 |     15 |      1 | Sub-command                                           |
 
 
-## Message body
+### Message body
 | Offset | Length | Data                                                  |
 |--------|--------|-------------------------------------------------------|
 |     16 |        | Message body                                          |
 
 
-## Chunk trailer
+### Chunk trailer
 | Offset | Length | Data                                                  |
 |--------|--------|-------------------------------------------------------|
 |     ?? |      1 | End of message f7                                     |
