@@ -211,12 +211,9 @@ Following SET operations are known:
 | Sub-command | Description            | Arguments
 |-------------|------------------------|-----------------------------------------------------------
 | 01          | Send preset            | *UUID*, preset name, version, description, *float*, *byte*, noisegate name, boolean, ?,?, float, 
-| 02          | Change value  ??       | ??
 | 04          | Change parameter       | String: pedal name, Byte: parameter reference, Float: new value
 | 06          | Change pedal           | String: old pedal name, String: new pedal name
 | 15          | Enable/disable a pedal | String: pedal name, Boolean: on/off
-| 23          |                        |
-| 24          |                        |
 | 38          | Change to preset       | Int: preset number (0 - 3)
 
 ### 01 Send preset 
