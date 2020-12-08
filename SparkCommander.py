@@ -60,7 +60,6 @@ size         = 33                                           # could be anything,
 block_filler = b'\x00\x00\x00\x00\x00\x00\x00\x00\x00'
 chunk_header = b'\xf0\x01\x3a\x15'
 
-# Must remember to set the size!!
 
 def pack_parameter_change (pedal, param, val):
     cmd = 0x01
