@@ -5,7 +5,7 @@ Python functions to send commands to the Spark over bluetooth
 Based on the outputs of the Spark Parser which analyses the data sent to the Spark  
 
 This works on a Windows 10 PC running Python 3.9 - using native sockets for bluetooth (which is only in Python 3.9)  
-Otherwise you need pybluez and ```#import bluetooth```
+Otherwise you need ``` pip import pybluez ``` and ```#import bluetooth```
 
 # Spark Parser
 Python code to parse the data packets sent to a Spark Amp
