@@ -8,7 +8,7 @@ Messages are exchanged in data blocks. The block contains one or more chunks, ea
 The pictures at the end may help visualise this.
 
 
-When the app sends a message then the Spark (usually) responds with an acknowledgemnent.
+When the app sends a message then the Spark (usually - see later) responds with an acknowledgemnent. 
 
 The data sent to the Spark can span chunks, but each block only contains a single chunk.
 So the format is block header, a chunk header, the data then the chunk trailer.
@@ -339,6 +339,14 @@ Multiple arguments, only first one is actually used
 
 After (most) successful operations, amp sends back an "ack" packet.
 This has the command 0x04, the same sequence number as the original packet and a sub-command the same as the sub-command sent to the Spark
+
+The operations that receive an ACK are:
+* Turn pedal on/off
+* Change pedal / amp
+* Change hardware preset
+
+The operations that do not receive an ACK are:
+* Change pedal parameter 
 
 # Pedal and amp names
 
