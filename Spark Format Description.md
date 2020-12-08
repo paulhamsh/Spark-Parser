@@ -276,7 +276,7 @@ Arguments are a string for the pedal name, a byte for which parameter is being a
 |  Byte    |      1 | (String length ??)                                    |
 |  String  |      x | Pedal name                                            |
 |  Byte    |      1 | Parameter reference                                   |
-|  Float   |      4 | Parameter value (0.xx represents x.x in UI)           |
+|  Float   |      4 | Parameter value (0.xx represents x.x in the app       |
 
 ### 06 Swap pedals
 
