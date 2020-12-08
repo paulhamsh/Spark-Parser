@@ -141,8 +141,9 @@ Strings have their length as their first byte (stored as 0x20 + length).
 
 An example is shown below, with each new data sequence on a new line. The bit expansion is the format byte with the bits reversed, to show where the new sequence starts.
 
-Exploring the data it doesn't look like the format bits are always correct.  
-It seems that each command / sub-command has a specific set of parameters and these bits are not required.  
+Exploring the data it doesn't look like the format bits are always correct.  But they are used by the Spark - if they are set to zero then the message doesn't work. Perhaps it uses them to find the start of a data element only and ignores any that imply another element starts within it.  
+
+It seems that each command / sub-command has a specific set of parameters and these bits are not required to fully interpret the message (even though Spark appears to use them). 
 
 ```
      F1   D1 D2 D3 D4   D5 D6 D7               Reversed bit expansion of F1
