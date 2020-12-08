@@ -1,4 +1,13 @@
-# Spark-Parser
+# Spark Commander
+
+Python functions to send commands to the Spark over bluetooth
+
+Based on the outputs of the Spark Parser which analyses the data sent to the Spark  
+
+This works on a Windows 10 PC running Python 3.9 - using native sockets for bluetooth (which is only in Python 3.9)  
+Otherwise you need pybluez and ```#import bluetooth```
+
+# Spark Parser
 Python code to parse the data packets sent to a Spark Amp
 
 This uses a M5Stack Core 2 ESP32 board connected to my PC via USB.
@@ -13,11 +22,13 @@ This is a work-in-progress to interpret the commands sent to the Spark and build
 
 I also had a version with the Core 2 as the receiver from the app, connected over wi-fi to a Pi 400 to send to the amp - but couldn't get it responsive enough (buffers on bluetooth or tcp/ip, I'm not sure). It nearly worked and captured a lot of the connection sequence, but wasn't reliable.
 
-Now considering using two Core 2s connected either via the USB to a PC or together over a serial connection of some sort.
+Now considering using two Core 2s connected either via the USB to a PC or together over a serial connection of some sort  
 
+Latest version (1.2) seems to work completely and can handle edge cases for most presets
 
-Latest version (1.0) seems to work completely and can handle edge cases for most presets
+# Spark Scanner Hex
 
+Like Spark Parser but output in hex
 
 Based on the work of Justin Nelson https://github.com/jrnelson90/tinderboxpedal and Yuriy Tsibizov https://github.com/ytsibizov/midibox
 
