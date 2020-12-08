@@ -340,35 +340,16 @@ Multiple arguments, only first one is actually used
 After (most) successful operations, amp sends back an "ack" packet.
 This has the command 0x04, the same sequence number as the original packet and a sub-command the same as the sub-command sent to the Spark
 
-# Pedal names
+# Pedal and amp names
 
-## Compressors
-
-| Name                |
-|---------------------|
-| LA2AComp            |
-| BlueComp            |
-| Compressor          |
-| BassComp            |
-| BBEOpticalComp      |
-
-## Drive
-
-| Name                |
-|---------------------|
-| Booster             |
-| DistortionTS9       |
-| Overdrive           |
-| Fuzz                |
-| ProCoRat            |
-| BassBigMuff         |
-| GuitarMuff          |
-| MaestroBassmaster   |
-| SABdriver           |
+## Noisegate
 
 | App name               | Spark internal name         |
 |------------------------|-----------------------------|
 | Noisegate              | bias.noisegate              |
+
+
+## Compressors
 
 | App name               | Spark internal name         |
 |------------------------|-----------------------------|
@@ -377,6 +358,8 @@ This has the command 0x04, the same sequence number as the original packet and a
 | Red Comp		     | Compressor                  |
 | Bass Comp		     | BassComp                    |
 | Optical Comp		     | BBEOpticalComp              |
+
+## Drive
 
 | App name               | Spark internal name         |
 |------------------------|-----------------------------|
@@ -389,6 +372,8 @@ This has the command 0x04, the same sequence number as the original packet and a
 | Guitar Muff		     | GuitarMuff                  |
 | Bassmaster		     | MaestroBassmaster           |
 | SAB Driver		     | SABdriver                   |
+
+## Amps
 
 | App name               | Spark internal name         |
 |------------------------|-----------------------------|
@@ -423,6 +408,8 @@ This has the command 0x04, the same sequence number as the original packet and a
 | W600			     | W600                        |
 | Hammer 500		     | Hammer500                   |
 
+## Modulation
+
 | App name               | Spark internal name         |
 |------------------------|-----------------------------|
 | Tremolo			     | Tremolo                     |
@@ -436,6 +423,8 @@ This has the command 0x04, the same sequence number as the original packet and a
 | Tremolator		     | Tremolator                  |
 | Tremolo Square		| TremoloSquare               |
 
+## Delay
+
 | App name               | Spark internal name         |
 |------------------------|-----------------------------|
 | Digital Delay		| DelayMono                   |
@@ -444,6 +433,8 @@ This has the command 0x04, the same sequence number as the original packet and a
 | Reverse Delay		| DelayReverse                |
 | Multi Head		     | DelayMultiHead              |
 | Echo Tape              | DelayRe201                  |
+
+## Reverb
 
 | App name               | Spark internal name         |
 |------------------------|-----------------------------|
