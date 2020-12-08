@@ -189,8 +189,8 @@ It appears that strings are the only variable length data sequence and the only 
 | Short string                     | 1 + 1-31 | 0x20 - 0x3f                             | Length + 0x20, bytes of string                               |
 | Very short sting                 | 2 + 1-15 | 0x01 - 0x0f, 0x20 - 0x2f, bytes         | Length, length + 0x20, bytes of string                       |
 | Long string                      |  2 + 32+ | 0x59, length, bytes of string           | 0x59, length, bytes of string                                |
-| Boolean "True"                   |        1 | 0x42                                    |                                                              |
-| Boolean "False"                  |        1 | 0x43                                    |                                                              |
+| Boolean "True"                   |        1 | 0x42                                    | Pedal Off                                                    |
+| Boolean "False"                  |        1 | 0x43                                    | Pedal on                                                     |
 | Float                            |    4 + 1 | 0x4a + 4 bytes of floating point        |                                                              |
 
 
@@ -268,12 +268,14 @@ Each pedal header is followed by values for each pedal parameter:
 
 Arguments are a string for the pedal name, a byte for which parameter is being altered (starting at 0) and a float for the new value.
 
+Floats representing values from 0 to 10.0 are stored as 0.0 to 1.0 (divide by ten)
+
 | Type     | Length | Content                                               |
 |----------|--------|-------------------------------------------------------|
 |  Byte    |      1 | (String length ??)                                    |
 |  String  |      x | Pedal name                                            |
 |  Byte    |      1 | Parameter reference                                   |
-|  Float   |      4 | Parameter value (0.xx represents x.x in the app       |
+|  Float   |      4 | Parameter value (0.xx represents x.x in the app)      |
 
 ### 06 Swap pedals
 
@@ -294,16 +296,7 @@ Arguments are a string for the current pedal name, and string for new pedal name
 |  String  |      x | Pedal name                                            |
 |  Boolean |      1 | Pedal on / off                                        |
 
-There is no consensus on what "True" value means, for different positions (maybe even pedals?) it is different.
-
-| Position       | Active     | Disabled   |
-|----------------|------------|------------|
-| 0 (noise gate) | 42 (True)  | 43 (False) |
-| 1 (compressor) | 42 (True)  | 43 (False) |
-| 2 (distortion) | 43 (False) | 42 (True)  |
-| 3 (amp)        | -          | -          |
-| 4 (chorus)     | 43 (False) | 42 (True)  |
-| 5 (delay)      | 43 (False) | 42 (True)  |
+On is 0x43, Off is 0x42.
 
 ### 38 Change preset 
 
