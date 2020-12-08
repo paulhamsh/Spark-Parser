@@ -106,11 +106,11 @@ It is also used in the acknowledgement message.
 |--------|------------------|
 | Data   |  sequence number |
 
-### Sequence number follow-on
+### Unkown
 
 | Offset |  13                           |  
 |--------|-------------------------------|
-| Data   |  sequence number follow-on ?? |
+| Data   |  unknown                      |
 
 It is known (from the existing working code) that this number is never checked by the amp.
 
@@ -320,17 +320,17 @@ Following GET operations are known:
 | Sub-command |                          |
 |-------------|--------------------------|
 |  01         | Get preset configuration |
-|  02         | ???                      |
 |  11         | Get device name          |
 |  23         | Get serial number        |
+|  24         | ???                      |
 
 ### 01 Get preset configuration
 
 Multiple arguments, only first one is actually used
 
- - Integer number - Preset number starting 0, or 0x0100 for "current"
- - 34x "0x00" (that is 11x "Integer number, value 0" + 0x00)
- ???
+ - Integer number - Preset number starting 0x0000 to 0x0003, or 0x0100 for "current"
+ - 34 times "0x00" 
+
 
 ## ACK packet
 
