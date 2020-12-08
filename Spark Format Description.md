@@ -366,6 +366,91 @@ This has the command 0x04, the same sequence number as the original packet and a
 | MaestroBassmaster   |
 | SABdriver           |
 
+| App name               | Spark internal name         |
+|------------------------|-----------------------------|
+| Noisegate              | bias.noisegate              |
+
+| App name               | Spark internal name         |
+|------------------------|-----------------------------|
+| LA Comp			     | LA2AComp                    |
+| Sustain Comp		     | BlueComp                    |
+| Red Comp		     | Compressor                  |
+| Bass Comp		     | BassComp                    |
+| Optical Comp		     | BBEOpticalComp              |
+
+| App name               | Spark internal name         |
+|------------------------|-----------------------------|
+| Booster			     | Booster                     |
+| Tube Drive		     | DistortionTS9               |
+| Over Drive		     | Overdrive                   |
+| Fuzz Face		     | Fuzz                        |
+| Black Op		     | ProCoRat                    |
+| Bass Muff		     | BassBigMuff                 |
+| Guitar Muff		     | GuitarMuff                  |
+| Bassmaster		     | MaestroBassmaster           |
+| SAB Driver		     | SABdriver                   |
+
+| App name               | Spark internal name         |
+|------------------------|-----------------------------|
+| Silver 120             | RolandJC120                 |
+| Black Duo    		| Twin                        |
+| AD Clean		     | ADClean                     |
+| Match DC		     | 94MatchDCV2                 |
+| Tweed Bass		     | Bassman                     |
+| AC Boost		     | AC Boost                    |
+| Checkmate		     | Checkmate                   |
+| Two Stone SP50		| TwoStoneSP50                |
+| American Deluxe		| Deluxe65                    |
+| Plexiglass		     | Plexi                       |
+| JM45			     | OverDrivenJM45              |
+| Lux Verb		     | OverDrivenLuxVerb           |
+| RB 101			     | Bogner                      |
+| British 30		     | OrangeAD30                  |
+| American High Gain	| AmericanHighGain            |
+| SLO 100			     | SLO100                      |
+| YJM100			     | YJM100                      |
+| Treadplate		     | Rectifier                   |
+| Insane			     | EVH                         |
+| Switch Axe		     | SwitchAxeLead               |
+| Rocker V		     | Invader                     |
+| BE 101			     | BE101                       |
+| Pure Acoustic		| Acoustic                    |
+| Fishboy			     | AcousticAmpV2               |
+| Jumbo			     | FatAcousticV2               |
+| Flat Acoustic		| FlatAcoustic                |
+| RB-800			     | GK800                       |
+| Sunny 3000		     | Sunny3000                   |
+| W600			     | W600                        |
+| Hammer 500		     | Hammer500                   |
+
+| App name               | Spark internal name         |
+|------------------------|-----------------------------|
+| Tremolo			     | Tremolo                     |
+| Chorus			     | ChorusAnalog                |
+| Flanger			     | Flanger                     |
+| Phaser			     | Phaser                      |
+| Vibrato			     | Vibrato01                   |
+| UniVibe			     | UniVibe                     |
+| Cloner Chorus		| Cloner                      |
+| Classic Vibe		     | MiniVibe                    |
+| Tremolator		     | Tremolator                  |
+| Tremolo Square		| TremoloSquare               |
+
+| App name               | Spark internal name         |
+|------------------------|-----------------------------|
+| Digital Delay		| DelayMono                   |
+| Echo Filt		     | DelayEchoFilt               |
+| Vintage Delay		| VintageDelay                |
+| Reverse Delay		| DelayReverse                |
+| Multi Head		     | DelayMultiHead              |
+| Echo Tape              | DelayRe201                  |
+
+| App name               | Spark internal name         |
+|------------------------|-----------------------------|
+| All Reverbs		     | bias.reverb                 |z
+
+
+
 # Connect messages
 
 These are the messages sent when the app connects to the Spark amp.
