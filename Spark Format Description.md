@@ -184,8 +184,8 @@ It appears that strings are the only variable length data sequence and the only 
 
 | Type                             |   Length |  Example                                | Description                                                  |
 |----------------------------------|----------|-----------------------------------------|--------------------------------------------------------------|
-| Byte                             |        1 | 0x10 - 0x1f                             | Subtract 0x10 from byte to get the value                     | 
-| Integer number, big endian ??    |        2 | 0000 - ffff                             | Not sure this exists                                         |
+| Byte  (or just a nibble?)        |        1 | 0x10 - 0x1f                             | Subtract 0x10 from byte to get the value                     | 
+| Integer number, big endian ??    |        2 | 0000 - ffff                             | Not sure this exists or perhaps it is 00 then a byte         |
 | Short string                     | 1 + 1-31 | 0x20 - 0x3f                             | Length + 0x20, bytes of string                               |
 | Very short sting                 | 2 + 1-15 | 0x01 - 0x0f, 0x20 - 0x2f, bytes         | Length, length + 0x20, bytes of string                       |
 | Long string                      |  2 + 32+ | 0x59, length, bytes of string           | 0x59, length, bytes of string                                |
