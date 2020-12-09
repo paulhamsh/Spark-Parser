@@ -7,7 +7,12 @@ Based on the outputs of the Spark Parser which analyses the data sent to the Spa
 This works on a Windows 10 PC running Python 3.9 - using native sockets for bluetooth (which is only in Python 3.9)  
 Otherwise you need ``` pip import pybluez ``` and ```#import bluetooth```
 
+There is a version for the Raspberry Pi 400 which will also locate the Spark from its name rather than bluetooth address.  
+
+Tested on little-endian machines only so far ```print(sys.byteorder)``` .  
+
 # Spark Parser
+
 Python code to parse the data packets sent to a Spark Amp
 
 This uses a M5Stack Core 2 ESP32 board connected to my PC via USB.
