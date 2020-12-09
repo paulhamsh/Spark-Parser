@@ -5,9 +5,11 @@ Python functions to send commands to the Spark over bluetooth
 Based on the outputs of the Spark Parser which analyses the data sent to the Spark  
 
 This works on a Windows 10 PC running Python 3.9 - using native sockets for bluetooth (which is only in Python 3.9)  
-Otherwise you need ``` pip import pybluez ``` and ```#import bluetooth```
+Otherwise you need ``` pip install pybluez ``` and ```#import bluetooth```.
 
-There is a version for the Raspberry Pi 400 which will also locate the Spark from its name rather than bluetooth address.  
+It also needs the bluetooth address of your Spark. BluettoothCL from NirSoft will find it (on Windows).
+
+There is a version for the Raspberry Pi 400 which will also locate the Spark from its name rather than bluetooth address.  This uses PyBluez which you need to  ```pip install pybluez```   
 
 Tested on little-endian machines only so far ```print(sys.byteorder)``` .  
 
