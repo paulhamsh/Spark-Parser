@@ -37,6 +37,7 @@ Latest version (1.2) seems to work completely and can handle edge cases for most
 
 Will read a hex string of the preset and output it like a python array/dictionary like below (it looks nicer in python - it has newlines and tabs):
 
+```
 preset = { 
 	"Filler": [0x00, 0x7f], 
 	"UUID": "961F7F40-77C3-4E98-A694-DF9CA4069955",
@@ -68,6 +69,7 @@ preset = {
 		"OnOff": "Off",
 		"Parameters": [0.182966, 0.672229, 0.157315, 0.141781, 0.150772, 0.216207, 0.149510] }], 
 	"End Filler": 0x46}
+```
 
 # Spark Scanner Hex
 
