@@ -35,7 +35,7 @@ Latest version (1.2) seems to work completely and can handle edge cases for most
 
 # Spark Hex Preset Extractor
 
-Will read a hex string of the preset and output it like a python array/dictionary like below (it looks nicer in python - it has newlines and tabs):
+Will read a hex string of the preset and output it like a python array/dictionary like below:
 
 ```
 preset = { 
