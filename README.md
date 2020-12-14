@@ -13,6 +13,8 @@ There is a version for the Raspberry Pi 400 which will also locate the Spark fro
 
 Tested on little-endian machines only so far ```print(sys.byteorder)``` .  
 
+Working on the command to send a full preset in the dictionary format below (see Spark Hex Preset Extractor). There are two bytes I can't work out which seem to stop it working - one in the chunk header and the filler at the end. 
+
 # Spark Parser
 
 Python code to parse the data packets sent to a Spark Amp
