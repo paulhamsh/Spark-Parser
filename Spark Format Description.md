@@ -7,7 +7,6 @@ By paulhamsh based on a description from ytsibizov.
 Messages are exchanged in data blocks. The block contains one or more chunks, each chunk carrying a part of the overall message. Blocks and chunks appear to have size limits which means messages span chunks and chunks span blocks.
 The pictures at the end may help visualise this.
 
-
 When the app sends a message then the Spark (usually - see later) responds with an acknowledgemnent. 
 
 The data sent to the Spark can span chunks, but each block only contains a single chunk.
@@ -26,6 +25,7 @@ There doesn't appear to be a byte showing the total number of chunks in the mess
 Chunks can start in one block and end in the following block. Even the chunk header can be split.
 
 It isn't clear why the send and receive packets are structured differently. Or why chunks span blocks.
+
 
 
 # Data message format
