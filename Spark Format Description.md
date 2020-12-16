@@ -196,12 +196,12 @@ It appears that strings are the only variable length data sequence and the only 
 
 ## Commands
 
-| Value | Command     |
-|-------|-------------|
-|  01   | Set         |
-|  02   | Get         | 
-|  03   | Response    |
-|  04   | Ack         |
+| Value | Command         |
+|-------|-----------------|
+|  01   | Set on Spark    |
+|  02   | Get from Spark  | 
+|  03   | Spark update    |
+|  04   | Ack             |
 
 
 ## SET command
@@ -324,6 +324,16 @@ Multiple arguments, only first one is actually used
  - Integer number - Preset number starting 0x0000 to 0x0003, or 0x0100 for "current"
  - 34 times "0x00" 
 
+
+## UPDATED Command
+
+Following UPDATED operations are known:
+
+| Sub-command | Description              |
+|-------------|--------------------------|
+|  06         | Pedal changed on Spark   |
+|  37         | Changed value on Spark   |
+|  38         | Preset changed on Spark  |
 
 ## ACK packet
 
