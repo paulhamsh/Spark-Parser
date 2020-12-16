@@ -1,3 +1,13 @@
+# Spark Parser Suite
+
+This is a suite of tools to analyse and mimic the bluetooth communication between the Spark app and the Spark amp.
+
+My set-up is as below - the M5Stack Core 2 is an ESP32 board. This appears to the app as the Spark amp and sends the bluetooth traffic to the PC as serial over USB. The PC makes a connection to the bluetooth address of the Spark amp (to avoid connecting to the Core 2 again).
+
+![Spark Connectivity](SparkConnectivity.jpg)
+
+I can't get it to work with a single Core connected to amp and app.
+
 # Spark Commander 7
 
 Python functions to send commands to the Spark over bluetooth
@@ -16,7 +26,6 @@ Tested on little-endian machines only so far ```print(sys.byteorder)``` .
 Will now send a full preset to the Spark - some bugs but works for quite a few presets (just not Spooky Melody yet)
 
 
-![Spark Connectivity](SparkConnectivity.jpg)
 
 
 # Spark Preset Converter
