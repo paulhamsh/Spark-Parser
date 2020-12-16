@@ -475,7 +475,7 @@ Shows the multi-block byte-level information for a preset
 
 Logical view of the data encoded in the preset
 
-![Spark Data Format 2](SparkDataForma32.jpg)
+![Spark Data Format 2](SparkDataFormat3.jpg)
 
 ## Non-preset data format
 
