@@ -15,6 +15,10 @@ Tested on little-endian machines only so far ```print(sys.byteorder)``` .
 
 Will now send a full preset to the Spark - some bugs but works for quite a few presets (just not Spooky Melody yet)
 
+
+![Spark Connectivity](SparkConnectivity.jpg)
+
+
 # Spark Preset Converter
 
 Will take a preset in the format below and output the hex string and a python byte string.
