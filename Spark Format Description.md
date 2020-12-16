@@ -465,8 +465,25 @@ Partial list so far
 | To Spark    | 02       | 01           | Get preset configuration | Lots of 00
 | From Spark  | 03       | 01           |                          | 
 
+## Preset data format (byte layout)
+
+Shows the multi-block byte-level information for a preset
 
 ![Spark Data Format](SparkDataFormat.jpg)
+
+## Preset format (logical)
+
+Logical view of the data encoded in the preset
+
+![Spark Data Format 2](SparkDataForma32.jpg)
+
+## Non-preset data format
+
+Shows the single block byte-level information for other commands (not preset send)
+
 ![Spark Data Format 2](SparkDataFormat2.jpg)
+
+
+
 
 
