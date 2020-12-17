@@ -2,6 +2,14 @@
 
 By paulhamsh based on a description from ytsibizov.
 
+TODO - what I still don't understand:
+
+. What the byte 0x11 is for in each pedal preset
+. Whether the nibble or byte data type really exists
+. Why the chunk header sometimes contains the count of data bytes remaining (excluding format bytes) and sometimes doesn't
+. What the format bytes are really used for, especially the one in front of the chunk header - it seems to have a special meaning
+. What that final byte is for in the preset - a checksum? If so it isn't checked
+
 # Overview
 
 Messages are exchanged in data blocks. The block contains one or more chunks, each chunk carrying a part of the overall message. Blocks and chunks appear to have size limits which means messages span chunks and chunks span blocks.
