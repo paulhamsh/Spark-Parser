@@ -9,6 +9,7 @@ TODO - what I still don't understand:
 * Why the chunk header sometimes contains the count of data bytes remaining (excluding format bytes) and sometimes doesn't
 * What the format bytes are really used for, especially the one in front of the chunk header - it seems to have a special meaning
 * What that final byte is for in the preset - a checksum? If so it isn't checked
+* What the byte after the sequence byte is for
 
 # Overview
 
