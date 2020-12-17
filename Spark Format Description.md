@@ -235,15 +235,15 @@ Followed by:
 
 | Type     | Length | Content                                               |
 |----------|--------|-------------------------------------------------------|
-|  Byte    |      1 | ??                                                    |
-|  Byte    |      1 | ??                                                    |
+|  Byte    |      1 | 00                                                    |
+|  Byte    |      1 | 7f - probably the hardware preset location            |
 |  UUID    |     36 | UUID for preset                                       |
 |  String  |      x | Preset name                                           |
 |  String  |      x | Version                                               |
 |  String  |      x | Preset description                                    |
-|  String  |      x | Icon name ??                                          |
-|  Float   |      4 | ??    Perhaps BPM (seems to be 60.0)                  |
-|  Byte    |      1 | ??    Perhaps number of pedals in preset              |
+|  String  |      x | Icon name                                             |
+|  Float   |      4 | BPM (seems to be 60.0)                                |
+|  Byte    |      1 | Number of pedals in preset                            |
 
 Followed by information for each pedal / amp:
 
