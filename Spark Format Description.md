@@ -225,11 +225,11 @@ A new preset is a multi-packet message.
 Each packet starts with two bytes for the total number of packets and which packet this is.  
 Each packet also has the same sequence number in the header.   
 
-| Type     | Length | Content                                               |
-|----------|--------|-------------------------------------------------------|
-|  Byte    |      1 | Number of packets in total (1- )                      |
-|  Byte    |      1 | Reference for this packet (0- )                       |
-|  Byte    |      1 | ??                                                    |
+| Type     | Length | Content                                                                     |
+|----------|--------|-----------------------------------------------------------------------------|
+|  Byte    |      1 | Number of packets in total (1- )                                            |
+|  Byte    |      1 | Reference for this packet (0- )                                             |
+|  Byte    |      1 | NUmber of bytes of data if this is the last packet (excludes format bytes)  |
 
 Followed by:
 
