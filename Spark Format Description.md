@@ -193,6 +193,7 @@ It appears that strings are the only variable length data sequence and the only 
 | Boolean "False"                  |        1 | 0x43                                    | Pedal on                                                     |
 | Float                            |    4 + 1 | 0x4a + 4 bytes of floating point        |                                                              |
 
+
 ![Spark Data Format 4](SparkDataFormat4.jpg)
 
 
