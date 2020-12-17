@@ -133,6 +133,18 @@ The command is also used in the acknowledgement message.
 
 This is then followed by the message body (see below)  
 
+### Multi-chunk messages and the multi-chunk inner header
+
+A message can be carried over multiple chunks. In this case each new chunk starts an inner header - the format byte, then three additional bytes as below.
+
+| Name   | 1           | 2                  | 3                           | 4                               |
+|--------|-------------|--------------------|-----------------------------|---------------------------------|
+| Data   | Format byte |  Number of chunks  |  This chunk (0 - number-1)  |  Number of data bytes remaining |
+
+The number of data bytes remaining is a count of bytes excluding the format bytes, and whilst always in the final chunk seems not to be in prior chunks when sending to the Spark.  
+The Format byte seems to have a special difference in this scenario, and has bit 3 (| 0x04) set for the all the chunks except the last, where is seems to have bit 3 empty (& 0xfb) but may have bit 4 set (| 0x08). This implies this bit can be used to determine the final chunk although it is not required for that. Having bit 3 set is inconsistent with the use of the format byte as it indicates data starting in byte 4, which is still part of this inner header 
+
+
 ### Trailer
 
 | Offset | xx |
