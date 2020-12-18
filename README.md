@@ -8,7 +8,7 @@ My set-up is as below - the M5Stack Core 2 is an ESP32 board. This appears to th
 
 I can't get it to work with a single Core connected to amp and app.
 
-# Spark Commander 7
+# Spark Commander 
 
 Python functions to send commands to the Spark over bluetooth
 
