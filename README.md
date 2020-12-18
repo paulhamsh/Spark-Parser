@@ -23,7 +23,7 @@ There is a version for the Raspberry Pi 400 which will also locate the Spark fro
 
 Tested on little-endian machines only so far ```print(sys.byteorder)``` .  
 
-Will now send a full preset to the Spark - some bugs but works for quite a few presets (just not Spooky Melody yet)
+Will now send all stock app presets to the Spark and all other commands - at last, no known bugs!
 
 
 
