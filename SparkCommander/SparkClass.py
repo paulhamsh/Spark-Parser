@@ -11,115 +11,120 @@ import struct
 
 
 class SparkMessage:
-
-
     block_header = b'\x01\xfe\x00\x00\x53\xfe'
-    size         = 33                                           # could be anything, will be replaced
+    # size could be anything and is replaced later
+    size         = 33                                           
     block_filler = b'\x00\x00\x00\x00\x00\x00\x00\x00\x00'
     chunk_header = b'\xf0\x01\x3a\x15'
-    this_chunk = 0
-    max_size = 0xad
+    max_block_size = 0xad
 
     def __init__(self):
-        self.snd_data = b''
+        # block_data stores the full block of data
+        self.block_data = b''
+        # temp_data stores the bytes as they are being packaged, to allow the format byte to be created
+        self.temp_data=b''
+        # header for each block
+        self.header = b''
+        # position in the data, and in the block
+        self.pos = 0
+        self.block_pos = 0
+
         self.this_cmd = 0
         self.this_sub_cmd = 0
-        self.multi = False
-        self.pos = 0
-        self.header = b''
-        self.block_pos = 0
-        self.final_data = 0
-        self.multi_chunk = False
-        self.tmp_data=b''
-        self.end_msg=b''
 
+        self.multi_chunk = False
+        # array for the output of each block
+        self.final_data = []
 
     ######## Helper functions to package a command for the Spark (handles the 'format bytes'
 
-    def pack_header(self, cmd, sub_cmd, multi):
-#        global snd_data, tmp_data, format_byte, this_chunk, this_cmd, this_sub_cmd
-#        global pos, header, block_pos, final_data, multi_chunk
-
-        self.header = self.block_header + bytes([self.size]) + self.block_filler + self.chunk_header + bytes([cmd]) + bytes([sub_cmd])
-        self.snd_data = self.header
-
-        self.pos = 1
-        self.block_pos = 0x10 + 0x06 + 1
+    # Creates the block and chunk headers, clears the data ready to accept bytes
+    # If a multi-chunk message, creates the three-byte sub-header and sets the format byte correctly
     
+    def create_header(self, cmd, sub_cmd, multi):
+        self.header = ( self.block_header + bytes([self.size]) +
+                        self.block_filler + self.chunk_header +
+                        bytes([cmd]) + bytes([sub_cmd]) )
+        
+        self.block_data = self.header
+
+        # starting at position 1 in the data
+        self.pos = 1
+        # block starting postition is past all the headers
+        self.block_pos = 0x10 + 0x06 + 1
+
+        # store these so we can create each header for multi-chunk messages
         self.this_cmd = cmd
         self.this_sub_cmd = sub_cmd
         self.multi_chunk = multi
 
         self.format_byte = 0
-        self.tmp_data = b''
+        self.temp_data = b''
     
         if self.multi_chunk:
-            self.format_byte = 4             # I don't know why - seems wrong but it is CRITICAL this is 4 except for the non-final chunks
-            self.tmp_data += b'\x03' + bytes([self.this_chunk]) + b'\x00'            # mutli-chunk header - assumes 3 chunks
+            # I don't know why - seems wrong but it is critial this is 4 except for the non-final chunks
+            self.format_byte = 4
+            # Mutli-chunk sub-header - assumes 3 chunks but replaced later
+            self.temp_data += b'\x03' + bytes([self.this_chunk]) + b'\x00'
             self.pos += 3
             self.block_pos += 3       
 
+    # Close this chunk - add the 0xf7 and flush any remaining data from temp_data into block_data
     def end_chunk(self):
-#        global snd_data, tmp_data, format_byte, pos, block_pos
-
-        self.tmp_data += b'\xf7'
+        self.temp_data += b'\xf7'
         self.pos += 1
         self.block_pos += 1
 
-        if len(self.tmp_data) == 1:
-            self.snd_data += self.tmp_data        # last byte is 0xf7 so we don't need a format byte
-        elif len(self.tmp_data) > 1:
-            self.snd_data += bytes([self.format_byte])
-            self.snd_data += self.tmp_data
+        if len(self.temp_data) == 1:
+            # last byte is 0xf7 so we don't need a format byte
+            self.block_data += self.temp_data        
+        elif len(self.temp_data) > 1:
+            self.block_data += bytes([self.format_byte])
+            self.block_data += self.temp_data
        
-
-    def start_packing (self, cmd, sub_cmd, multi = False):
-#        global final_data, this_chunk
-
+    # Start the process - clear the data and create the headers
+    def start_message (self, cmd, sub_cmd, multi = False):
         self.final_data = []
         self.this_chunk = 0
-        self.pack_header (cmd, sub_cmd, multi)
+        self.create_header (cmd, sub_cmd, multi)
     
-        
-    def add_pack (self, msg, setformat = True):
-#        global snd_data, tmp_data, pos, format_byte, block_pos, this_chunk, multi_chunk, final_data
-
-
+    # Add bytes to a temporary message
+    # If at the eighth byte flush this into the block_data message
+    # If hit the size limit and a multi-chunk message then store block_data in final_data and start a new block
+    def add_bytes (self, msg, setformat = True):
         if setformat == True:
             self.format_byte |= (1 << (self.pos-1))
         
         for i in range (0, len(msg)):
-            self.tmp_data += bytes([msg[i]])
+            self.temp_data += bytes([msg[i]])
             self.pos += 1
             self.block_pos += 1
 
             if self.pos == 8:
-                self.snd_data += bytes([self.format_byte])
-                self.snd_data += self.tmp_data
+                self.block_data += bytes([self.format_byte])
+                self.block_data += self.temp_data
                 self.format_byte = 0
                 self.pos = 1
                 self.block_pos += 1
-                self.tmp_data = b''
+                self.temp_data = b''
 
-            if (self.block_pos == self.max_size - 1) and self.multi_chunk:
+            if (self.block_pos == self.max_block_size - 1) and self.multi_chunk:
                 self.end_chunk()
                 self.this_chunk += 1
-                size = len(self.snd_data)
-                end_msg = self.snd_data[0:6] + bytes([size]) + self.snd_data[7:]
+                size = len(self.block_data)
+                end_msg = self.block_data[0:6] + bytes([size]) + self.block_data[7:]
                 self.final_data.append(end_msg)
             
-                self.pack_header(self.this_cmd, self.this_sub_cmd, True)
+                self.create_header(self.this_cmd, self.this_sub_cmd, True)
          
 
 
-    def end_pack(self): 
-#        global snd_data, tmp_data, pos, format_byte, final_data, multi_chunk
-
+    def end_message(self): 
         self.end_chunk()
     
         # update the block size field        
-        self.block_size = len(self.snd_data)
-        self.end_msg = self.snd_data[0:6] + bytes([self.block_size]) + self.snd_data[7:]
+        self.block_size = len(self.block_data)
+        self.end_msg = self.block_data[0:6] + bytes([self.block_size]) + self.block_data[7:]
         self.final_data.append(self.end_msg)
     
         # update chunk size and counts for all chunks
@@ -132,11 +137,14 @@ class SparkMessage:
                 if m == num_chunks - 1:   #  last chunk
                     s1 = self.block_size - 16 - 6 - 4 - 1
                     chunk_size = s1 - int ((s1+2) / 8)
-                    format1 = format1 & 0xfb  # very odd it sometimes doesn't like a 4 in the first format for the final chunk
+                    # very odd it sometimes doesn't like a 4 in the first format for the final chunk
+                    format1 = format1 & 0xfb  
                 else:
                     chunk_size = 0
             
-                self.end_msg = tmp_msg[0:22] + bytes([format1]) + bytes ([num_chunks]) + bytes ([m]) + bytes([chunk_size]) + tmp_msg[26:]
+                self.end_msg = ( tmp_msg[0:22] + bytes([format1]) +
+                                 bytes ([num_chunks]) + bytes ([m]) +
+                                 bytes([chunk_size]) + tmp_msg[26:] )
                 self.final_data[m] = self.end_msg
 
         return self.final_data
@@ -144,79 +152,77 @@ class SparkMessage:
     ######## Helper functions for packing data types
 
     def add_prefixed_string(self, pack_str):
-        self.add_pack ([len(pack_str)], False)
-        self.add_pack (bytes([len(pack_str)+0x20]) + bytes(pack_str, 'utf-8'))
+        self.add_bytes ([len(pack_str)], False)
+        self.add_bytes (bytes([len(pack_str)+0x20]) + bytes(pack_str, 'utf-8'))
 
     def add_string(self, pack_str):
-        self.add_pack (bytes([len(pack_str)+0x20]) + bytes(pack_str, 'utf-8'))
+        self.add_bytes (bytes([len(pack_str)+0x20]) + bytes(pack_str, 'utf-8'))
 
     def add_long_string(self, pack_str):
-        self.add_pack (b'\x59')
-        self.add_pack (bytes([len(pack_str)]) + bytes(pack_str, 'utf-8'), False)    
+        self.add_bytes (b'\x59')
+        self.add_bytes (bytes([len(pack_str)]) + bytes(pack_str, 'utf-8'), False)    
 
     def add_float(self,flt):
         bytes_val = struct.pack(">f", flt)
-        self.add_pack (b'\x4a' + bytes_val)
+        self.add_bytes (b'\x4a' + bytes_val)
 
     def add_onoff (self,onoff):
         if onoff == "On":
             b = b'\x43'
         else:
             b = b'\x42'
-        self.add_pack(b)
+        self.add_bytes(b)
     
     ######## Functions to package a command for the Spark
 
 
-    def pack_parameter_change (self, pedal, param, val):
+    def change_effect_parameter (self, pedal, param, val):
         cmd = 0x01
         sub_cmd = 0x04
     
-        self.start_packing (cmd, sub_cmd)
+        self.start_message (cmd, sub_cmd)
         self.add_prefixed_string (pedal)
-        self.add_pack ([param])
+        self.add_bytes ([param])
         self.add_float(val)
-        return self.end_pack ()
+        return self.end_message ()
 
 
-    def pack_pedal_change (self, pedal1, pedal2):
+    def change_effect (self, pedal1, pedal2):
         cmd = 0x01
         sub_cmd = 0x06
 
-        self.start_packing (cmd, sub_cmd)
+        self.start_message (cmd, sub_cmd)
         self.add_prefixed_string (pedal1)
         self.add_prefixed_string (pedal2)
-        return self.end_pack ()
+        return self.end_message ()
 
-    def pack_hardware_preset_change (self, preset_num):    # preset_num is 0 to 3
+    def change_hardware_preset (self, preset_num):
+        # preset_num is 0 to 3
         cmd = 0x01
         sub_cmd = 0x38
 
-        self.start_packing (cmd, sub_cmd)
-        self.add_pack ([0], False)
-        self.add_pack ([preset_num], False)         
-        return self.end_pack ()
+        self.start_message (cmd, sub_cmd)
+        self.add_bytes ([0], False)
+        self.add_bytes ([preset_num], False)         
+        return self.end_message ()
 
-    def pack_turn_pedal_onoff (self, pedal, onoff):
+    def turn_effect_onoff (self, pedal, onoff):
         cmd = 0x01
         sub_cmd = 0x15
 
-        self.start_packing (cmd, sub_cmd)
+        self.start_message (cmd, sub_cmd)
         self.add_prefixed_string (pedal)
         self.add_onoff (onoff)
-        return self.end_pack ()    
+        return self.end_message ()    
 
 
-    def pack_preset (self, preset):
-        global this_chunk, tmp_data, snd_data
-    
+    def create_preset (self, preset):
         cmd = 0x01
         sub_cmd = 0x01
         this_chunk = 0
 
-        self.start_packing (cmd, sub_cmd, True)
-
-        self.add_pack (b'\x00\x7f', False)       
+        self.start_message (cmd, sub_cmd, True)
+        self.add_bytes (b'\x00\x7f', False)       
         self.add_long_string (preset["UUID"])
         self.add_string (preset["Name"])
         self.add_string (preset["Version"])
@@ -227,16 +233,16 @@ class SparkMessage:
             self.add_string (descr)
         self.add_string (preset["Icon"])
         self.add_float (preset["BPM"])
-        self.add_pack (bytes([0x10 + 7]))        # always 7 pedals
+        self.add_bytes (bytes([0x10 + 7]))        # always 7 pedals
         for i in range (0, 7):
             self.add_string (preset["Pedals"][i]["Name"])
             self.add_onoff (preset["Pedals"][i]["OnOff"])
             num_p = len(preset["Pedals"][i]["Parameters"])
-            self.add_pack (bytes([num_p + 0x10]))
+            self.add_bytes (bytes([num_p + 0x10]))
             for p in range (0, num_p):
-                self.add_pack (bytes([p]), False) 
-                self.add_pack (b'\x11')
+                self.add_bytes (bytes([p]), False) 
+                self.add_bytes (b'\x11')
                 self.add_float (preset["Pedals"][i]["Parameters"][p])
-        self.add_pack (bytes([preset["End Filler"]]))                   
-        return self.end_pack ()
+        self.add_bytes (bytes([preset["End Filler"]]))                   
+        return self.end_message ()
 
