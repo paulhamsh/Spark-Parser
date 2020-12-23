@@ -162,10 +162,22 @@ class SparkMessage:
         self.add_bytes (b'\x59')
         self.add_bytes (bytes([len(pack_str)]) + bytes(pack_str, 'utf-8'), False)    
 
-    def add_float(self,flt):
-        bytes_val = struct.pack(">f", flt)
-        self.add_bytes (b'\x4a' + bytes_val)
+#    def add_float(self,flt):
+#        bytes_val = struct.pack(">f", flt)
+#        self.add_bytes (b'\x4a' + bytes_val)
 
+    # floats are special - bit 7 is actually stored in the format byte and not in the data
+    def add_float (self, flt):
+        bytes_val = struct.pack(">f", flt)
+        self.add_bytes(b'\x4a', True)
+#        bv=b''
+        for b in bytes_val:
+            fmt_bit = ((b & 0x80) == 0x80)
+            self.add_bytes(bytes([b & 0x7f]), fmt_bit)
+#            bv += bytes([b & 0x7f])
+#        if bytes_val != bv:
+#             print ("ADDED FLOAT WITH DIFF", bytes_val, bv) 
+           
     def add_onoff (self,onoff):
         if onoff == "On":
             b = b'\x43'
