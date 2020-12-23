@@ -1,4 +1,4 @@
-Hex sent       Integer     Float         Integer     Floa
+Hex sent       Integer     Float         Integer     Float
 by app            representation            bit shifted
 --------       ----------  -------       ----------  -------
 3c370034,      1010237492, 0.01117,      1013842336, 0.01453
