@@ -13,8 +13,8 @@ I can't get it to work with a single Core connected to amp and app.
 This is a python class to create a preset in python 'bytes' format from an input like the one below.  
 It has been completely re-written now that the Spark messages are fully understood - hopefully it is a lot clearer and better structured to explain how to create a Spark bluetooth message from scratch.  
 
-It can also generate other messages to send to the spark, such as hardware preset change, effect on/off, change a parameter value (like gain), change an effect (eg swap one amp model for another).
-It is the basis for Midi Contol (see below)
+It can also generate other messages to send to the spark, such as hardware preset change, effect on/off, change a parameter value (like gain), change an effect (eg swap one amp model for another).  
+It is the basis for Midi Contol (see next section)
 
 ```
 preset  = { "Preset Number": [0x00, 0x7f],
@@ -47,6 +47,42 @@ preset  = { "Preset Number": [0x00, 0x7f],
                   "OnOff": "On",
                   "Parameters": [0.285714, 0.408354, 0.289489, 0.388317, 0.582143, 0.650000, 0.200000] }],
             "End Filler": 0xb4}
+
+    msg = SparkMessage()
+    
+    print("Preset ", preset["Name"])
+    b = msg.create_preset(preset_list[8])
+    send_preset(b)
+    
+    print("Change to hardware preset 0")
+    b = msg.change_hardware_preset(0)
+    send_receive(b[0])
+    
+    print ("Sweep up gain")    
+    for v in range (0, 100):
+        val = v*0.01
+        b = msg.change_effect_parameter ("Twin", 0, val)
+        just_send(b[0])
+
+    print ("Change amp from Twin to SLO 100")
+    b = msg.change_effect ("Twin", "SLO100")
+    send_receive(b[0])
+
+    print ("Change amp from SLO 100 to Twin")
+    b = msg.change_effect ( "SLO100", "Twin")
+    send_receive(b[0])
+
+    print ("Turn on the Booster pedal")
+    b = msg.turn_effect_onoff  ( "Booster", "On")
+    send_receive(b[0])
+
+    print ("Booster gain to 9")
+    b = msg.change_effect_parameter ("Booster", 0, 0.9)
+    just_send(b[0])
+    
+    print ("Turn off Booster")       
+    b = msg.turn_effect_onoff ( "Booster", "Off")
+    send_receive(b[0])
 
 ```
 
