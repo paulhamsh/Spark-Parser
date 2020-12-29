@@ -11,13 +11,6 @@ import struct
 
 
 class SparkMessage:
-    #block_header = b'\x01\xfe\x00\x00\x53\xfe'
-    # size could be anything and is replaced later
-    #size         = 33                                           
-    #block_filler = b'\x00\x00\x00\x00\x00\x00\x00\x00\x00'
-    #chunk_header = b'\xf0\x01\x3a\x15'
-    #max_block_size = 0xad
-    #max_data_size = 0x93 # 0xad - 16 - 6 - 4 
 
     def __init__(self):
        
