@@ -14,6 +14,7 @@ This is a python class to create a preset in python 'bytes' format from an input
 It has been completely re-written now that the Spark messages are fully understood - hopefully it is a lot clearer and better structured to explain how to create a Spark bluetooth message from scratch.  
 
 It can also generate other messages to send to the spark, such as hardware preset change, effect on/off, change a parameter value (like gain), change an effect (eg swap one amp model for another).  
+
 It is the basis for Midi Contol (see next section)
 
 ```
