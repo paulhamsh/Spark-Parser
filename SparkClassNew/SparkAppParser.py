@@ -101,7 +101,9 @@ try:
         reader.set_message(dat)
         reader.read_message()
         print ("================")
+        print (reader.python)
         print (reader.text)
+        print (reader.raw)
         
 finally:
     ser.close()

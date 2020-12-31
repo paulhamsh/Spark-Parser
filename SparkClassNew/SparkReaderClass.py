@@ -173,21 +173,29 @@ class SparkReadMessage:
 
     def del_indent(self):
         self.indent = self.indent[:-1]
+
+    def add_python(self, python_str):
+        self.python += self.indent + python_str + "\n"
         
-    def add_str(self, a_title, a_str):
+    def add_str(self, a_title, a_str, nature = "alL"):
         self.raw += a_str+ " "
         self.text += self.indent+ "%-20s" %  a_title+":"+ a_str + "\n"
-        self.python += self.indent + "\""+a_title+"\":\""+ a_str + "\",\n"
+        if nature != "python":
+            self.python += self.indent + "\""+a_title+"\":\""+ a_str + "\",\n"
 
-    def add_int(self, a_title, an_int):
+    def add_int(self, a_title, an_int, nature = "all"):
         self.raw += "%d" % an_int + " "
         self.text += self.indent + "%-20s" % a_title+ ":" + "%d" % an_int + "\n"
-        self.python += self.indent+ "\"" +a_title+ "\":" + "%d" % an_int + ",\n"
+        if nature != "python":
+            self.python += self.indent+ "\"" +a_title+ "\":" + "%d" % an_int + ",\n"
 
-    def add_float(self, a_title, a_float):
+    def add_float(self, a_title, a_float, nature = "all"):
         self.raw += "%2.4f" % a_float + " "
         self.text += self.indent + "%-20s" % a_title+ ":" + "%2.4f" % a_float + "\n"
-        self.python += self.indent + "\"" +a_title+ "\": " + "%2.4f" % a_float  +",\n"     
+        if nature == "python":
+            self.python += self.indent + "%2.4f" % a_float  +",\n"
+        else:
+            self.python += self.indent + "\"" +a_title+ "\": " + "%2.4f" % a_float  +",\n"           
         
     ######## Functions to package a command for the Spark
 
@@ -245,22 +253,29 @@ class SparkReadMessage:
         self.add_float ("BPM", bpm)
 
         num_effects = self.read_byte() - 0x90
+        self.add_python("\"Effects\": [")
         self.add_indent()
+
         for i in range (0, 7):
             e_str = self.read_string ()
             e_onoff = self.read_onoff ()
+            self.add_python ("{")
             self.add_str ("EffectName", e_str)
             self.add_str ("OnOff", e_onoff)
             num_p = self.read_byte() - 0x90
+            self.add_python("\"Parameters\":[")
             self.add_indent()
             for p in range (0, num_p):
                 num = self.read_byte() 
                 spec = self.read_byte ()
                 val = self.read_float()
-                self.add_int ("Parameter", num)
-                self.add_str ("Special", hex(spec))
-                self.add_float ("Value", val)
+                self.add_int ("Parameter", num, "python")
+                self.add_str ("Special", hex(spec), "python")
+                self.add_float ("Value", val, "python")
+            self.add_python("],")
             self.del_indent()
+            self.add_python("},")
+        self.add_python("],")
         self.del_indent()
         unk = self.read_byte()
         self.add_str("Unknown", hex(unk))
