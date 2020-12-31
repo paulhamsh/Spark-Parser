@@ -2,10 +2,20 @@
 #
 # Spark Class
 #
-# Class to package commands to send to Positive Grid Spark
+# Class to read commands sent to Positive Grid Spark
 #
 # See https://github.com/paulhamsh/Spark-Parser
 
+# Use:  reader = SparkReadMessage()
+#       reader.set_message(preset)
+#       reader.read_message()
+#
+#       reader.text is a text representation
+#       reader.raw is a raw unformatted text representation
+#       reader.pyhon is a python dict representation
+#
+#       reader.data is the input bytes
+#       reader.message is the 8 bit data in the message
 
 import struct
 
@@ -187,7 +197,7 @@ class SparkReadMessage:
         effect = self.read_prefixed_string ()
         param = self.read_byte ()
         val = self.read_float()
-        self.add_string ("Effect", effect)
+        self.add_str ("Effect", effect)
         self.add_int ("Parameter", param)
         self.add_float ("Value", val)
         self.end_str()
@@ -196,15 +206,15 @@ class SparkReadMessage:
         self.start_str()
         effect1 = self.read_prefixed_string ()
         effect2 = self.read_prefixed_string ()
-        self.add_str ("Old effect", effect1)
-        self.add_str ("New effect", effect2)
+        self.add_str ("OldEffect", effect1)
+        self.add_str ("NewEffect", effect2)
         self.end_str()
 
     def read_hardware_preset (self):
         self.start_str()
         self.read_byte ()
         preset_num = self.read_byte ()
-        self.add_int ("Preset", preset_num)
+        self.add_int ("NewPreset", preset_num)
         self.end_str()
 
     def read_effect_onoff (self):
@@ -253,7 +263,7 @@ class SparkReadMessage:
             self.del_indent()
         self.del_indent()
         unk = self.read_byte()
-        self.add_str("Uknown", hex(unk))
+        self.add_str("Unknown", hex(unk))
         self.end_str()
 
 
@@ -270,11 +280,11 @@ class SparkReadMessage:
             elif sub_cmd == 0x04:
                 self.read_effect_parameter()
             elif sub_cmd == 0x06:
-                self.read_change_effect()
+                self.read_effect()
             elif sub_cmd == 0x15:
                 self.read_effect_onoff()
             elif sub_cmd == 0x38:
-                self.read_hardware_change()
+                self.read_hardware_preset()
         elif cmd == 0x04:
             print ("Acknowledged")
         else:
