@@ -11,7 +11,6 @@ import struct
 
 
 class SparkMessage:
-
     def __init__(self):
        
         # declarations
@@ -75,6 +74,7 @@ class SparkMessage:
                 bit8 = 0
                 seq = b''
                 for ind in range (0,seq_len):
+                    # can change this so not [dat] and not [ x: x+1]
                     [dat] = chunk[this_seq * 7 + ind : this_seq * 7 + ind + 1]
                     if dat & 0x80 == 0x80:
                         bit8 |= (1<<ind)

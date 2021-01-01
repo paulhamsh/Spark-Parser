@@ -224,7 +224,14 @@ class SparkReadMessage:
         preset_num = self.read_byte ()
         self.add_int ("NewPreset", preset_num)
         self.end_str()
-
+        
+    def read_store_hardware_preset (self):
+        self.start_str()
+        self.read_byte ()
+        preset_num = self.read_byte ()
+        self.add_int ("NewStoredPreset", preset_num)
+        self.end_str()
+        
     def read_effect_onoff (self):
         self.start_str()
         effect = self.read_prefixed_string ()
@@ -289,7 +296,7 @@ class SparkReadMessage:
         self.msg_pos = 0
 
     def run_interpreter (self, cmd, sub_cmd):
-        if (cmd == 0x01) or (cmd == 0x03):
+        if cmd == 0x01:
             if   sub_cmd == 0x01:
                 self.read_preset()
             elif sub_cmd == 0x04:
@@ -300,8 +307,23 @@ class SparkReadMessage:
                 self.read_effect_onoff()
             elif sub_cmd == 0x38:
                 self.read_hardware_preset()
+            else:
+                print(hex(cmd), hex(sub_cmd), "not handled")
+        elif cmd == 0x03:
+            if   sub_cmd == 0x01:
+                self.read_preset()
+            elif sub_cmd == 0x06:
+                self.read_effect()
+            elif sub_cmd == 0x27:
+                self.read_store_hardware_preset()
+            elif sub_cmd == 0x37:
+                self.read_effect_parameter()
+            elif sub_cmd == 0x38:
+                self.read_hardware_preset()
+            else:
+                print(hex(cmd), hex(sub_cmd), "not handled")       
         elif cmd == 0x04:
-            print ("Acknowledged")
+            print ("Acknowledgement")
         else:
             print ("Unprocessed")
         return 1

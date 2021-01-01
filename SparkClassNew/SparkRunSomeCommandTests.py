@@ -53,6 +53,8 @@ try:
     send_receive(b[0])
     time.sleep(3)
 
+
+    
     print ("Sweep up gain")    
     for v in range (0, 100):
         val = v*0.01
@@ -101,6 +103,12 @@ try:
         send_preset(b)
         time.sleep(5)
 
+    print("Preset ", preset_list[1]["Name"])
+    b = msg.create_preset(preset_list[8])
+    send_preset(b)
+    time.sleep(5)
+
+    
     print ("Finished")
 
     
