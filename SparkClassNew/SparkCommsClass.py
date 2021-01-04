@@ -1,36 +1,64 @@
 import socket
 import serial
 
-BAUD = 1000000
+baud = 1000000
 
-SERVER_PORT = 2
-MY_SPARK = "08:EB:ED:4E:47:07"  # Change to address of YOUR Spark
+port = 2
+
             
 class SparkComms:
     def __init__(self, comms_type):
+        # type can be serial, bt_socket (for unix bluetooth) or bluetooth (pybluez)
         self.comms_type = comms_type
 
     # functions to connect, send and receive serial or bluetooth
-    def connect(self):
-        if self.comms_type == "bluetooth":
-            self.bt_sock = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
-            self.bt_sock.connect((MY_SPARK, SERVER_PORT))
-            print ("Bluetooth connected successfully")
+    def connect(self, name=""):
+        if name =="":
+            if self.comms_type == "serial":
+                name = "COM7"
+            elif self.comms_type == "bluetooth":
+                print ("Checking for bluetooth devices...")
+                bt_devices = bluetooth.discover_devices(lookup_names=True)
+                print("Found {} devices.".format(len(bt_devices)))
+
+                for addr, bt_name in bt_devices:
+                    print("  {} - {}".format(addr, bt_name))
+                    if bt_name == "Spark 40 Audio":
+                        address = addr
+            elif self.comms_type == "bt_socket":
+                print ("Sorry, with unix sockets you need the bt address")
         else:
-            self.ser_sock = serial.Serial("COM7", BAUD, timeout=0)
+            address = name
+            
+        if self.comms_type == "bt_socket":
+            self.bt_sock = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
+            self.bt_sock.connect((address, port))
+            print ("Bluetooth unix socket connected successfully")
+        elif self.comms_type == "bluteooth":
+            self.bt_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+            self.bt_sock.connect((address, port))
+            print ("Bluetooth pybluez connected successfully")
+        elif self.comms_type == "serial":
+            self.ser_sock = serial.Serial(address, baud, timeout=0)
             print ("Serial connected successfully")
+        else:
+            print ("Type of comms needs to be serial, bt_socket or bluetooth")
             
     def send_it(self, dat):
-        if self.comms_type == "bluetooth":
+        if self.comms_type == "bt_socket" or self.comms_type =="bluetooth":
             self.bt_sock.send(dat)
-        else:
+        elif self.comms_type == "serial":
             self.ser_sock.write(dat)
+        else:
+            print ("Type of comms needs to be serial, bt_socket or bluetooth")
 
     def read_it (self, dat_len):
-        if self.comms_type == "bluetooth":
+        if self.comms_type == "bt_socket" or self.comms_type == "bluetooth":
             dat = self.bt_sock.recv(dat_len)
-        else:
+        elif self.comms_type == "serial":
             dat = self.ser_sock.read(dat_len)
+        else:
+            print ("Type of comms needs to be serial, bt_socket or bluetooth")
         return dat
 
 

@@ -163,6 +163,7 @@ class SparkReadMessage:
         self.text = ""
         self.python = "{"
         self.raw = ""
+        self.dict={}
         self.indent = ""
 
     def end_str (self):
@@ -244,13 +245,13 @@ class SparkReadMessage:
         self.start_str()
         self.read_byte ()
         preset = self.read_byte()
-        self.add_int ("Preset number", preset)
+        self.add_int ("PresetNumber", preset)
         uuid = self.read_string ()
         self.add_str ("UUID", uuid)
         name = self.read_string ()
         self.add_str ("Name", name)
         version = self.read_string ()
-        self.add_str ("Verion", version)
+        self.add_str ("Version", version)
         descr = self.read_string ()
         self.add_str ("Description", descr)
 
@@ -260,14 +261,14 @@ class SparkReadMessage:
         self.add_float ("BPM", bpm)
 
         num_effects = self.read_byte() - 0x90
-        self.add_python("\"Effects\": [")
+        self.add_python("\"Pedals\": [")
         self.add_indent()
 
         for i in range (0, 7):
             e_str = self.read_string ()
             e_onoff = self.read_onoff ()
             self.add_python ("{")
-            self.add_str ("EffectName", e_str)
+            self.add_str ("Name", e_str)
             self.add_str ("OnOff", e_onoff)
             num_p = self.read_byte() - 0x90
             self.add_python("\"Parameters\":[")
