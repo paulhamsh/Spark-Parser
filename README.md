@@ -87,6 +87,18 @@ preset  = { "Preset Number": [0x00, 0x7f],
 
 ```
 
+# Messages you can make   
+
+You can use the python routines below - as per the examples above.   
+
+```  
+change_effect_parameter (pedal, param, val)
+change_effect (pedal1, pedal2)
+change_hardware_preset (preset_num)
+turn_effect_onoff (pedal, onoff)
+create_preset (preset)
+```
+
 # Midi Control
 
 A python program for Windows or Raspberry Pi to interpret USB midi messages and send commands to the Spark - change hardware preset, send a complete preset, change effect, turn effect on / off and change a parameter for an effect (the parameter value is derived from a Midi CC message value in the range 0 to 127 and mapped to the 0.0 to 1.0 range.
